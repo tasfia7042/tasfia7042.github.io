@@ -4,19 +4,18 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tasfia Tasnim</title>
-<meta name="description" content="Tasfia Tasnim. PhD student in Computer Science at The University of Texas at Dallas. Research on software testing and LLMs for software engineering." />
+<meta name="description" content="Tasfia Tasnim. PhD student in Computer Science at The University of Texas at Dallas." />
 
 <style>
 :root {
-  --bg: #FDFCF8;
-  --bg-alt: #F1EEE4;
-  --ink: #1A1712;
-  --muted: #5A544A;
-  --faint: #8A8478;
-  --rule: #D6D0C2;
-  --accent: #7A2E2A;
-  --accent-soft: #9B4540;
-  --link: #2F4A6B;
+  --bg: #FFFFFF;
+  --bg-alt: #F8F7F4;
+  --ink: #1A1A1A;
+  --muted: #555555;
+  --faint: #888888;
+  --rule: #E5E5E5;
+  --accent: #B7472A;
+  --link: #4F6D8C;
 
   --serif: "Times New Roman", Times, Georgia, serif;
   --sans: "Calibri", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -31,7 +30,7 @@ body {
   color: var(--ink);
   font-family: var(--serif);
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 ::selection { background: var(--accent); color: var(--bg); }
@@ -39,49 +38,103 @@ body {
 a {
   color: var(--link);
   text-decoration: none;
-  border-bottom: 1px solid rgba(47, 74, 107, 0.3);
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: color 0.15s ease;
 }
 
-a:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
+a:hover { color: var(--accent); }
 
-.container {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-@media (max-width: 640px) {
-  .container { padding: 0 1.25rem; }
-  html { font-size: 16px; }
-}
-
-/* MASTHEAD */
-.masthead {
-  padding: 4rem 0 2rem;
+/* TOP NAV */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--rule);
 }
 
-.masthead-inner {
+.topnav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.9rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topnav-brand {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.topnav-links {
+  display: flex;
+  gap: 1.6rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.topnav-links a {
+  color: var(--muted);
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.topnav-links a:hover {
+  color: var(--accent);
+}
+
+.topnav-links a.active {
+  color: var(--ink);
+  border-bottom: 2px solid var(--accent);
+}
+
+@media (max-width: 720px) {
+  .topnav-inner { padding: 0.7rem 1.25rem; flex-direction: column; gap: 0.5rem; }
+  .topnav-links { gap: 1rem; font-size: 0.88rem; flex-wrap: wrap; justify-content: center; }
+}
+
+/* MAIN GRID */
+.layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 2rem 4rem;
   display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 280px 1fr;
+  gap: 4rem;
   align-items: start;
 }
 
-@media (max-width: 640px) {
-  .masthead-inner {
-    grid-template-columns: 120px 1fr;
-    gap: 1.5rem;
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 2rem 1.5rem 3rem;
   }
 }
 
-.portrait {
-  width: 160px;
-  height: 160px;
+/* SIDEBAR */
+.sidebar {
+  position: sticky;
+  top: 5.5rem;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: static;
+    text-align: center;
+  }
+}
+
+.profile-img {
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   background: var(--bg-alt);
   border: 1px solid var(--rule);
@@ -89,244 +142,240 @@ a:hover {
   align-items: center;
   justify-content: center;
   font-family: var(--serif);
-  font-size: 3.8rem;
+  font-size: 5rem;
   font-weight: 400;
   color: var(--accent);
   font-style: italic;
+  margin: 0 auto 1.4rem;
   overflow: hidden;
-  position: relative;
+  object-fit: cover;
 }
 
-.portrait::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  box-shadow: inset 0 2px 8px rgba(0,0,0,0.04);
-}
-
-@media (max-width: 640px) {
-  .portrait { width: 120px; height: 120px; font-size: 2.8rem; }
-}
-
-.name {
+.sidebar-name {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 2.6rem;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.4rem;
+  font-size: 1.55rem;
+  line-height: 1.15;
   color: var(--ink);
+  margin-bottom: 0.5rem;
 }
 
-.affiliation {
-  font-family: var(--sans);
-  font-size: 1rem;
+.sidebar-affil {
+  font-family: var(--serif);
+  font-size: 0.98rem;
   color: var(--muted);
-  margin-bottom: 0.2rem;
   line-height: 1.5;
+  margin-bottom: 0.4rem;
 }
 
-.affiliation strong {
-  color: var(--ink);
-  font-weight: 600;
+.sidebar-affil a {
+  color: var(--link);
 }
 
-.affiliation-location {
-  font-family: var(--sans);
-  font-size: 0.92rem;
-  color: var(--faint);
-  margin-top: 0.3rem;
+.sidebar-affil a:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
-.contacts {
-  margin-top: 1rem;
+.sidebar-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--rule);
+  margin: 1.2rem auto;
+  border: none;
+}
+
+.sidebar-email {
+  font-family: var(--serif);
+  font-size: 0.98rem;
+  color: var(--link);
+  display: inline-block;
+  word-break: break-all;
+}
+
+.sidebar-email:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.sidebar-icons {
+  margin-top: 1.2rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 1rem;
+  justify-content: center;
+  gap: 1.1rem;
   font-family: var(--sans);
-  font-size: 0.92rem;
-  color: var(--muted);
+  font-size: 0.85rem;
 }
 
-.contacts a {
+.sidebar-icons a {
   color: var(--muted);
   border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
 }
 
-.contacts a:hover {
+.sidebar-icons a:hover {
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
 
-.contacts .sep {
-  color: var(--faint);
-  user-select: none;
-}
-
-@media (max-width: 640px) {
-  .name { font-size: 2rem; }
-  .contacts { font-size: 0.86rem; gap: 0.3rem 0.8rem; }
-}
-
-/* SECTIONS */
-section {
-  padding: 2.6rem 0;
+/* MAIN CONTENT */
+.content h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.55rem;
+  color: var(--ink);
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--rule);
 }
 
-section:last-of-type { border-bottom: none; }
-
-.section-title {
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
+.content h2:not(:first-child) {
+  margin-top: 3rem;
 }
 
-/* BIO */
-.bio p {
-  margin-bottom: 0.95rem;
-  font-size: 1.08rem;
-  line-height: 1.65;
+.content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: var(--ink);
+  margin-bottom: 1rem;
 }
 
-.bio p:last-child { margin-bottom: 0; }
+.content p:last-child { margin-bottom: 0; }
 
-.bio strong { font-weight: 700; }
-
-.bio em {
+.content em {
   font-style: italic;
-  color: var(--accent-soft);
+}
+
+.content strong {
+  font-weight: 700;
+}
+
+.content a {
+  color: var(--link);
+  border-bottom: 1px solid rgba(79, 109, 140, 0.3);
+}
+
+.content a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
 }
 
 /* NEWS */
 .news-list {
   list-style: none;
   padding: 0;
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  border: 1px solid var(--rule);
+  background: var(--bg-alt);
+}
+
+.news-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.news-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.news-list::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 3px;
 }
 
 .news-item {
   display: grid;
-  grid-template-columns: 7rem 1fr;
-  gap: 1.5rem;
-  padding: 0.55rem 0;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1.2rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.97rem;
+  line-height: 1.5;
   align-items: baseline;
-  font-size: 1rem;
-  line-height: 1.55;
 }
+
+.news-item:last-child { border-bottom: none; }
 
 .news-date {
   font-family: var(--sans);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--faint);
-  letter-spacing: 0.02em;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .news-text { color: var(--ink); }
 
-.news-text em {
-  font-style: italic;
-  color: var(--accent-soft);
-}
+.news-text em { color: var(--accent); font-style: italic; }
 
 .news-tag {
   display: inline-block;
   font-family: var(--sans);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 600;
-  padding: 0.12rem 0.5rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
   border-radius: 2px;
   background: var(--accent);
   color: var(--bg);
   margin-right: 0.4rem;
-  vertical-align: 0.1em;
+  vertical-align: 0.12em;
 }
 
-@media (max-width: 640px) {
-  .news-item {
-    grid-template-columns: 1fr;
-    gap: 0.2rem;
-    padding: 0.7rem 0;
-    border-bottom: 1px dotted var(--rule);
-  }
-  .news-item:last-child { border-bottom: none; }
-}
-
-/* INTERESTS */
-.interests {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.6rem;
-}
-
-.interest {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 0.98rem;
-  color: var(--muted);
-  padding: 0.25rem 0.7rem;
-  border: 1px solid var(--rule);
-  border-radius: 2px;
-  background: var(--bg-alt);
+@media (max-width: 600px) {
+  .news-item { grid-template-columns: 1fr; gap: 0.2rem; }
 }
 
 /* PUBLICATIONS */
-.pub-group-heading {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.1rem;
-  color: var(--ink);
-  margin: 1.5rem 0 0.7rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px dotted var(--rule);
-}
-
-.pub-group-heading:first-child { margin-top: 0; }
-
-.pub-list {
-  list-style: none;
-  padding: 0;
-  counter-reset: pub;
-}
-
-.pub-entry {
+.pub {
   display: grid;
-  grid-template-columns: 2rem 1fr;
-  gap: 0.5rem;
-  padding: 0.9rem 0;
-  counter-increment: pub;
-  font-size: 1rem;
-  line-height: 1.55;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1.4rem;
+  padding: 1.3rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
 }
 
-.pub-entry::before {
-  content: "[" counter(pub) "]";
+.pub:last-child { border-bottom: none; }
+
+.pub-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--bg-alt);
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--sans);
-  font-size: 0.85rem;
-  color: var(--faint);
-  padding-top: 0.1rem;
-  font-weight: 500;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 2px;
+}
+
+.pub-body {
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .pub-title {
+  font-family: var(--serif);
   font-weight: 700;
+  font-size: 1.05rem;
   color: var(--ink);
+  margin-bottom: 0.25rem;
 }
 
 .pub-authors {
   color: var(--muted);
-  font-size: 0.96rem;
-  display: block;
-  margin-top: 0.2rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
 }
 
 .pub-authors .self {
@@ -334,21 +383,20 @@ section:last-of-type { border-bottom: none; }
   font-weight: 700;
   text-decoration: underline;
   text-decoration-color: var(--rule);
-  text-underline-offset: 3px;
+  text-underline-offset: 2px;
 }
 
 .pub-venue {
   font-style: italic;
   color: var(--muted);
-  font-size: 0.96rem;
-  display: block;
-  margin-top: 0.2rem;
+  font-size: 0.94rem;
+  margin-bottom: 0.4rem;
 }
 
 .pub-venue .year {
   font-style: normal;
   font-family: var(--sans);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--faint);
   margin-left: 0.3rem;
   font-weight: 500;
@@ -357,112 +405,106 @@ section:last-of-type { border-bottom: none; }
 .pub-status {
   display: inline-block;
   font-family: var(--sans);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 600;
-  padding: 0.12rem 0.5rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
   border-radius: 2px;
   margin-left: 0.4rem;
-  vertical-align: 0.15em;
-}
-
-.pub-status.accept {
+  vertical-align: 0.18em;
   background: #2F4A36;
   color: #EAE5D6;
 }
 
 .pub-links {
-  margin-top: 0.4rem;
   display: flex;
-  gap: 0.7rem;
+  gap: 0.4rem;
+  flex-wrap: wrap;
   font-family: var(--sans);
-  font-size: 0.82rem;
-  letter-spacing: 0.02em;
-  font-weight: 500;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .pub-links a {
-  color: var(--link);
-  border-bottom: none;
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  background: var(--bg);
   text-transform: lowercase;
 }
 
-.pub-links a::before {
-  content: "[ ";
-  color: var(--faint);
-}
-.pub-links a::after {
-  content: " ]";
-  color: var(--faint);
+.pub-links a:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
 }
 
-.pub-links a:hover { color: var(--accent); }
+@media (max-width: 600px) {
+  .pub { grid-template-columns: 1fr; gap: 0.7rem; }
+  .pub-thumb { width: 120px; aspect-ratio: 4 / 3; }
+}
 
-/* TEACHING */
-.teach-block { margin-bottom: 1.3rem; }
-.teach-block:last-child { margin-bottom: 0; }
-
-.teach-block-title {
+/* PUB GROUPS */
+.pub-year {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.05rem;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--accent);
+  margin: 1.3rem 0 0.3rem;
 }
 
-.teach-list {
+.pub-year:first-child { margin-top: 0; }
+
+.see-all {
+  margin-top: 1rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+/* HONORS */
+.honors-list {
   list-style: none;
   padding: 0;
 }
 
-.teach-item {
-  display: grid;
-  grid-template-columns: 5.5rem 1fr auto;
-  gap: 1rem;
-  padding: 0.4rem 0;
-  font-size: 0.98rem;
-  align-items: baseline;
+.honor-item {
+  padding: 0.5rem 0 0.5rem 1.4rem;
+  font-size: 1rem;
+  position: relative;
+  line-height: 1.55;
+  color: var(--ink);
 }
 
-.teach-code {
-  font-family: var(--sans);
-  font-size: 0.85rem;
+.honor-item::before {
+  content: "\2726";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
   color: var(--accent);
-  font-weight: 600;
+  font-size: 0.78rem;
 }
 
-.teach-name { color: var(--ink); }
-
-.teach-term {
+.honor-note {
+  display: block;
   font-family: var(--sans);
-  font-size: 0.82rem;
   color: var(--faint);
-  font-weight: 500;
+  font-size: 0.85rem;
+  margin-top: 0.1rem;
 }
 
-@media (max-width: 640px) {
-  .teach-item {
-    grid-template-columns: auto 1fr;
-    gap: 0.6rem;
-  }
-  .teach-term {
-    grid-column: 1 / -1;
-    padding-left: 0;
-    font-size: 0.78rem;
-  }
-}
-
-/* EDUCATION / EXPERIENCE */
-.entry-list { list-style: none; padding: 0; }
-
+/* TEACHING / EXPERIENCE */
 .entry {
   display: grid;
   grid-template-columns: 9rem 1fr;
-  gap: 1.5rem;
-  padding: 0.9rem 0;
-  align-items: baseline;
+  gap: 1.4rem;
+  padding: 0.7rem 0;
   border-bottom: 1px dotted var(--rule);
+  align-items: baseline;
+  font-size: 1rem;
 }
 
 .entry:last-child { border-bottom: none; }
@@ -471,14 +513,10 @@ section:last-of-type { border-bottom: none; }
   font-family: var(--sans);
   font-size: 0.82rem;
   color: var(--faint);
-  padding-top: 0.2rem;
   font-weight: 500;
 }
 
-.entry-role {
-  font-size: 1.02rem;
-  color: var(--ink);
-}
+.entry-role { color: var(--ink); }
 
 .entry-role strong { font-weight: 700; }
 
@@ -486,24 +524,71 @@ section:last-of-type { border-bottom: none; }
   display: block;
   font-style: italic;
   color: var(--muted);
-  font-size: 0.96rem;
+  font-size: 0.94rem;
   margin-top: 0.1rem;
 }
 
 .entry-note {
   display: block;
   font-family: var(--sans);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   color: var(--muted);
-  margin-top: 0.3rem;
-  line-height: 1.5;
+  margin-top: 0.25rem;
 }
 
-@media (max-width: 640px) {
-  .entry {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
-  }
+@media (max-width: 600px) {
+  .entry { grid-template-columns: 1fr; gap: 0.2rem; padding: 0.9rem 0; }
+}
+
+/* TEACHING TABLE */
+.teach-block { margin-bottom: 1.5rem; }
+.teach-block:last-child { margin-bottom: 0; }
+
+.teach-block-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.teach-row {
+  display: grid;
+  grid-template-columns: 6rem 1fr auto;
+  gap: 1rem;
+  padding: 0.35rem 0;
+  font-size: 0.97rem;
+  align-items: baseline;
+  border-bottom: 1px dotted var(--rule);
+}
+
+.teach-row:last-child { border-bottom: none; }
+
+.teach-code { font-family: var(--sans); font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+.teach-name { color: var(--ink); }
+.teach-term { font-family: var(--sans); font-size: 0.82rem; color: var(--faint); font-weight: 500; }
+
+@media (max-width: 600px) {
+  .teach-row { grid-template-columns: auto 1fr; gap: 0.5rem; }
+  .teach-term { grid-column: 1 / -1; font-size: 0.78rem; }
+}
+
+/* INTERESTS */
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.55rem;
+}
+
+.interest {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding: 0.22rem 0.65rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: var(--bg-alt);
 }
 
 /* TOOLKIT */
@@ -512,17 +597,16 @@ section:last-of-type { border-bottom: none; }
   padding: 0;
   display: grid;
   grid-template-columns: 7rem 1fr;
-  gap: 0.5rem 1.5rem;
-  font-size: 0.98rem;
+  gap: 0.5rem 1.4rem;
+  font-size: 0.96rem;
 }
 
 .kit-label {
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--accent);
   font-weight: 600;
-  letter-spacing: 0.02em;
-  padding-top: 0.2rem;
+  padding-top: 0.15rem;
 }
 
 .kit-values {
@@ -530,45 +614,15 @@ section:last-of-type { border-bottom: none; }
   line-height: 1.55;
 }
 
-@media (max-width: 640px) {
-  .kit-list {
-    grid-template-columns: 1fr;
-    gap: 0.15rem 0;
-  }
-  .kit-values { padding-bottom: 0.6rem; }
-}
-
-/* AWARDS */
-.awards-list { list-style: none; padding: 0; }
-.award-item {
-  padding: 0.55rem 0 0.55rem 1.3rem;
-  font-size: 1rem;
-  color: var(--ink);
-  position: relative;
-  line-height: 1.55;
-}
-
-.award-item::before {
-  content: "\2726";
-  position: absolute;
-  left: 0;
-  top: 0.55rem;
-  color: var(--accent);
-  font-size: 0.8rem;
-}
-
-.award-note {
-  display: block;
-  font-family: var(--sans);
-  color: var(--faint);
-  font-size: 0.86rem;
-  font-style: normal;
-  margin-top: 0.1rem;
+@media (max-width: 600px) {
+  .kit-list { grid-template-columns: 1fr; gap: 0.1rem 0; }
+  .kit-values { padding-bottom: 0.5rem; }
 }
 
 /* FOOTER */
 footer {
-  padding: 3rem 0 4rem;
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--rule);
   font-family: var(--sans);
   font-size: 0.82rem;
   color: var(--faint);
@@ -576,384 +630,406 @@ footer {
   line-height: 1.6;
 }
 
-footer a {
-  color: var(--faint);
-  border-bottom-color: var(--rule);
-}
-
-.footer-line { margin-bottom: 0.4rem; }
+footer a { color: var(--faint); }
+footer a:hover { color: var(--accent); }
 
 </style>
 </head>
 <body>
 
-<main class="container">
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="#" class="topnav-brand">Tasfia Tasnim</a>
+    <div class="topnav-links">
+      <a href="#about" class="active">about</a>
+      <a href="#publications">publications</a>
+      <a href="#teaching">teaching</a>
+      <a href="#cv">cv</a>
+    </div>
+  </div>
+</nav>
 
-  <header class="masthead">
-    <div class="masthead-inner">
-      <div class="portrait" aria-label="Tasfia Tasnim">TT</div>
-      <div>
-        <h1 class="name">Tasfia Tasnim</h1>
-        <p class="affiliation">
-          PhD Student, <strong>Department of Computer Science</strong><br/>
-          The University of Texas at Dallas
-        </p>
-        <p class="affiliation-location">Richardson, Texas</p>
-        <div class="contacts">
-          <a href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a>
-          <span class="sep">&middot;</span>
-          <a href="#">Google Scholar</a>
-          <span class="sep">&middot;</span>
-          <a href="#">GitHub</a>
-          <span class="sep">&middot;</span>
-          <a href="#">LinkedIn</a>
-          <span class="sep">&middot;</span>
-          <a href="#">CV</a>
-        </div>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="profile-img" aria-label="Tasfia Tasnim">TT</div>
+    <h1 class="sidebar-name">Tasfia Tasnim</h1>
+    <div class="sidebar-affil">
+      Ph.D. Student, Computer Science<br/>
+      <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>
+    </div>
+    <hr class="sidebar-divider"/>
+    <a class="sidebar-email" href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a>
+    <div class="sidebar-icons">
+      <a href="#" title="Google Scholar">scholar</a>
+      <a href="#" title="GitHub">github</a>
+      <a href="#" title="LinkedIn">linkedin</a>
+      <a href="#" title="CV">cv</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <section id="about">
+      <h2>About me</h2>
+      <p>
+        I am a Ph.D. student in the Department of Computer Science at <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>. Before UTD, I was a graduate research assistant at the <a href="https://www.uncc.edu/">University of North Carolina at Charlotte</a> from 2024 to 2025, and earlier served as a Lecturer at the <a href="#">Military Institute of Science and Technology</a> in Dhaka, Bangladesh.
+      </p>
+      <p>
+        My research lives at the intersection of <em>software testing</em> and <em>large language models</em>, with a growing focus on the trustworthiness and explainability of LLMs in correctness critical software tasks. Concretely, I work on automated test oracle generation, mutation testing, and the evaluation of LLM based program repair. I am interested in the question of when we can actually trust what a model produces, and what principled measurements of that trust should look like.
+      </p>
+      <p>
+        Outside of research, I enjoy reading, cooking, and long walks with my husband.
+      </p>
+    </section>
+
+    <section id="news">
+      <h2>Recent News</h2>
+      <ul class="news-list">
+        <li class="news-item">
+          <div class="news-date">Apr 2026</div>
+          <div class="news-text">
+            <span class="news-tag">New</span>
+            Our paper <em>TOGBench</em> has been accepted at <strong>AIware 2026</strong> (Benchmark and Dataset Track).
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">Jan 2026</div>
+          <div class="news-text">
+            Started as a Graduate Teaching Assistant at <strong>UT Dallas</strong>, TAing <em>SE 4367</em> and <em>CS / SE 6356</em>.
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">Aug 2024</div>
+          <div class="news-text">
+            Began doctoral studies in Computer Science at the University of North Carolina at Charlotte.
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">2023</div>
+          <div class="news-text">
+            Our journal paper <em>Predictis</em> was published in <strong>BMC Health Services Research</strong>.
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">2022</div>
+          <div class="news-text">
+            Our systematic review on <em>Digital Health Interventions for Cervical Cancer Care</em> was published.
+          </div>
+        </li>
+        <li class="news-item">
+          <div class="news-date">Dec 2021</div>
+          <div class="news-text">
+            Presented our cyberbullying detection framework at <strong>IC4ME2 2021</strong>, Rajshahi University.
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="interests">
+      <h2>Research Interests</h2>
+      <div class="interests">
+        <span class="interest">Software Testing</span>
+        <span class="interest">Test Oracle Generation</span>
+        <span class="interest">LLMs for Software Engineering</span>
+        <span class="interest">Automated Program Repair</span>
+        <span class="interest">Mutation Testing</span>
+        <span class="interest">LLM Trustworthiness</span>
+        <span class="interest">Explainability</span>
+        <span class="interest">Benchmark Design</span>
+        <span class="interest">Empirical Software Engineering</span>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <section id="about">
-    <div class="section-title">About</div>
-    <div class="bio">
-      <p>
-        I am a PhD student in Computer Science at <strong>The University of Texas at Dallas</strong>. My research lives at the intersection of <em>software testing</em> and <em>large language models</em>, with a growing focus on <em>trustworthiness</em> and <em>explainability</em> of LLMs in correctness critical software tasks.
-      </p>
-      <p>
-        Concretely, I work on automated test oracle generation, mutation testing, and the evaluation of LLM based program repair. I am interested in the question of when we can actually trust what a model produces, and what principled measurements of that trust should look like. My ongoing work builds benchmarks and evaluation methodologies that expose the gap between apparent LLM performance and real world software engineering reliability.
-      </p>
-      <p>
-        Before UTD I spent a year at the University of North Carolina at Charlotte as a graduate research assistant, and earlier served as a Lecturer at the Military Institute of Science and Technology in Dhaka, where I taught data structures, object oriented programming, and computer graphics to undergraduate students. That teaching experience continues to shape how I approach research: carefully, with an eye for the person on the other side of the page.
-      </p>
-    </div>
-  </section>
+    <section id="publications">
+      <h2>Highlighted Publications</h2>
 
-  <section id="news">
-    <div class="section-title">News</div>
-    <ul class="news-list">
-      <li class="news-item">
-        <div class="news-date">Apr 2026</div>
-        <div class="news-text">
-          <span class="news-tag">New</span>
-          Our paper <em>TOGBench: A Developer Written Multi Variant Dataset and Benchmark Suite for Test Oracle Generation</em> has been accepted at <strong>AIware 2026</strong> (Benchmark and Dataset Track).
-        </div>
-      </li>
-      <li class="news-item">
-        <div class="news-date">Jan 2026</div>
-        <div class="news-text">
-          Started as a Graduate Teaching Assistant at <strong>The University of Texas at Dallas</strong>, TAing <em>SE 4367: Software Testing, Verification, Validation and Quality Assurance</em> and <em>CS / SE 6356: Software Maintenance, Evolution, and Re-Engineering</em>.
-        </div>
-      </li>
-      <li class="news-item">
-        <div class="news-date">Aug 2024</div>
-        <div class="news-text">
-          Began doctoral studies in Computer Science at the University of North Carolina at Charlotte.
-        </div>
-      </li>
-      <li class="news-item">
-        <div class="news-date">2023</div>
-        <div class="news-text">
-          Our journal paper <em>Predictis: an IoT and machine learning based system to predict risk level of cardio vascular diseases</em> was published in <strong>BMC Health Services Research</strong>.
-        </div>
-      </li>
-      <li class="news-item">
-        <div class="news-date">2022</div>
-        <div class="news-text">
-          Our systematic review <em>Digital Health Interventions for Cervical Cancer Care</em> was published.
-        </div>
-      </li>
-      <li class="news-item">
-        <div class="news-date">Dec 2021</div>
-        <div class="news-text">
-          Presented <em>A Framework to Detect and Prevent Cyberbullying from Social Media by Exploring Machine Learning Algorithms</em> at <strong>IC4ME2 2021</strong>, Rajshahi University, Bangladesh.
-        </div>
-      </li>
-    </ul>
-  </section>
+      <div class="pub-year">2026</div>
 
-  <section id="interests">
-    <div class="section-title">Research Interests</div>
-    <div class="interests">
-      <span class="interest">Software Testing</span>
-      <span class="interest">Test Oracle Generation</span>
-      <span class="interest">LLMs for Software Engineering</span>
-      <span class="interest">Automated Program Repair</span>
-      <span class="interest">Mutation Testing</span>
-      <span class="interest">LLM Trustworthiness</span>
-      <span class="interest">Explainability</span>
-      <span class="interest">Benchmark Design</span>
-      <span class="interest">Empirical Software Engineering</span>
-    </div>
-  </section>
-
-  <section id="publications">
-    <div class="section-title">Publications</div>
-
-    <div class="pub-group-heading">2026</div>
-    <ol class="pub-list">
-      <li class="pub-entry">
-        <div>
-          <span class="pub-title">TOGBench: A Developer Written Multi Variant Dataset and Benchmark Suite for Test Oracle Generation</span>
-          <span class="pub-status accept">Accepted</span>
-          <span class="pub-authors"><span class="self">Tasfia Tasnim</span>, et al.</span>
-          <span class="pub-venue">ACM International Conference on AI Foundation Models and Software Engineering (AIware), Benchmark and Dataset Track <span class="year">2026</span></span>
+      <article class="pub">
+        <div class="pub-thumb">TOGBench<br/>AIware</div>
+        <div class="pub-body">
+          <div class="pub-title">TOGBench: A Developer Written Multi Variant Dataset and Benchmark Suite for Test Oracle Generation<span class="pub-status">Accepted</span></div>
+          <div class="pub-authors"><span class="self">Tasfia Tasnim</span>, et al.</div>
+          <div class="pub-venue">ACM International Conference on AI Foundation Models and Software Engineering (AIware), Benchmark and Dataset Track <span class="year">2026</span></div>
           <div class="pub-links">
             <a href="#">openreview</a>
             <a href="#">code</a>
             <a href="#">dataset</a>
+            <a href="#">bibtex</a>
           </div>
         </div>
-      </li>
-    </ol>
+      </article>
 
-    <div class="pub-group-heading">Earlier work</div>
-    <ol class="pub-list">
-      <li class="pub-entry">
-        <div>
-          <span class="pub-title">Predictis: an IoT and machine learning based system to predict risk level of cardio vascular diseases</span>
-          <span class="pub-authors">
+      <div class="pub-year">2023</div>
+
+      <article class="pub">
+        <div class="pub-thumb">Predictis<br/>BMC HSR</div>
+        <div class="pub-body">
+          <div class="pub-title">Predictis: an IoT and machine learning based system to predict risk level of cardio vascular diseases</div>
+          <div class="pub-authors">
             Muhammad Nazrul Islam, Kazi Rafid Raiyan, Shutonu Mitra, M. M. Rushadul Mannan, <span class="self">Tasfia Tasnim</span>, Asima Oshin Putul, Angshu Bikash Mandol
-          </span>
-          <span class="pub-venue">BMC Health Services Research <span class="year">2023</span></span>
+          </div>
+          <div class="pub-venue">BMC Health Services Research <span class="year">2023</span></div>
           <div class="pub-links">
             <a href="#">html</a>
+            <a href="#">bibtex</a>
           </div>
         </div>
-      </li>
-      <li class="pub-entry">
-        <div>
-          <span class="pub-title">Digital Health Interventions for Cervical Cancer Care: A Systematic Review and Future Research Opportunities</span>
-          <span class="pub-authors">
+      </article>
+
+      <div class="pub-year">2022</div>
+
+      <article class="pub">
+        <div class="pub-thumb">Cervical<br/>Cancer<br/>Review</div>
+        <div class="pub-body">
+          <div class="pub-title">Digital Health Interventions for Cervical Cancer Care: A Systematic Review and Future Research Opportunities</div>
+          <div class="pub-authors">
             Muhammad Nazrul Islam, <span class="self">Tasfia Tasnim</span>, Md Shadman Aadeeb, Nafiz Imtiaz Khan, Md Abdur Razzak
-          </span>
-          <span class="pub-venue">Systematic Review <span class="year">2022</span></span>
+          </div>
+          <div class="pub-venue">Systematic Review <span class="year">2022</span></div>
           <div class="pub-links">
             <a href="#">html</a>
+            <a href="#">bibtex</a>
           </div>
         </div>
-      </li>
-      <li class="pub-entry">
-        <div>
-          <span class="pub-title">A Framework to Detect and Prevent Cyberbullying from Social Media by Exploring Machine Learning Algorithms</span>
-          <span class="pub-authors">
+      </article>
+
+      <div class="pub-year">2021</div>
+
+      <article class="pub">
+        <div class="pub-thumb">Cyber<br/>bullying<br/>IC4ME2</div>
+        <div class="pub-body">
+          <div class="pub-title">A Framework to Detect and Prevent Cyberbullying from Social Media by Exploring Machine Learning Algorithms</div>
+          <div class="pub-authors">
             Shutonu Mitra, <span class="self">Tasfia Tasnim</span>, Arr Rafi Islam, Nafiz Imtiaz Khan, Shajahan Majib
-          </span>
-          <span class="pub-venue">6th International Conference on Computer, Communication, Chemical, Materials and Electronic Engineering (IC4ME2), Rajshahi University, Bangladesh <span class="year">2021</span></span>
+          </div>
+          <div class="pub-venue">6th International Conference on Computer, Communication, Chemical, Materials and Electronic Engineering (IC4ME2), Rajshahi University, Bangladesh <span class="year">2021</span></div>
           <div class="pub-links">
             <a href="#">html</a>
+            <a href="#">bibtex</a>
           </div>
         </div>
-      </li>
-    </ol>
-  </section>
+      </article>
+    </section>
 
-  <section id="teaching">
-    <div class="section-title">Teaching</div>
+    <section id="teaching">
+      <h2>Teaching</h2>
 
-    <div class="teach-block">
-      <div class="teach-block-title">The University of Texas at Dallas, as Teaching Assistant</div>
-      <ul class="teach-list">
-        <li class="teach-item">
+      <div class="teach-block">
+        <div class="teach-block-title">The University of Texas at Dallas, as Teaching Assistant</div>
+        <div class="teach-row">
           <span class="teach-code">SE 4367</span>
           <span class="teach-name">Software Testing, Verification, Validation and Quality Assurance</span>
           <span class="teach-term">Spring 2026</span>
-        </li>
-        <li class="teach-item">
+        </div>
+        <div class="teach-row">
           <span class="teach-code">CS / SE 6356</span>
           <span class="teach-name">Software Maintenance, Evolution, and Re-Engineering</span>
           <span class="teach-term">Spring 2026</span>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
 
-    <div class="teach-block">
-      <div class="teach-block-title">Military Institute of Science and Technology, as Lecturer</div>
-      <ul class="teach-list">
-        <li class="teach-item">
+      <div class="teach-block">
+        <div class="teach-block-title">Military Institute of Science and Technology, as Lecturer</div>
+        <div class="teach-row">
           <span class="teach-code">CSE 121</span>
           <span class="teach-name">Introduction to Computer Science and Programming Language (theory)</span>
           <span class="teach-term">Fall 2022</span>
-        </li>
-        <li class="teach-item">
+        </div>
+        <div class="teach-row">
           <span class="teach-code">CSE 122</span>
           <span class="teach-name">Intro to Computer Science and Programming Language (sessional)</span>
           <span class="teach-term">Fall 2022</span>
-        </li>
-        <li class="teach-item">
+        </div>
+        <div class="teach-row">
           <span class="teach-code">CSE 414</span>
           <span class="teach-name">Computer Graphics (sessional)</span>
           <span class="teach-term">Fall 2022</span>
-        </li>
-        <li class="teach-item">
+        </div>
+        <div class="teach-row">
           <span class="teach-code">CSE 204</span>
           <span class="teach-name">Data Structures and Algorithms (sessional)</span>
           <span class="teach-term">Spring 2022</span>
-        </li>
-        <li class="teach-item">
+        </div>
+        <div class="teach-row">
           <span class="teach-code">CSE 276</span>
           <span class="teach-name">Computer Programming Language (sessional)</span>
           <span class="teach-term">Spring 2022</span>
-        </li>
-        <li class="teach-item">
+        </div>
+        <div class="teach-row">
           <span class="teach-code">CSE 402</span>
           <span class="teach-name">Information System Design and Development (sessional)</span>
           <span class="teach-term">Spring 2022</span>
-        </li>
-        <li class="teach-item">
+        </div>
+        <div class="teach-row">
           <span class="teach-code">CSE 206</span>
           <span class="teach-name">Object Oriented Programming (sessional)</span>
           <span class="teach-term">Spring 2021, 2022</span>
-        </li>
-      </ul>
-    </div>
-  </section>
+        </div>
+      </div>
+    </section>
 
-  <section id="education">
-    <div class="section-title">Education</div>
-    <ul class="entry-list">
-      <li class="entry">
+    <section id="education">
+      <h2>Education</h2>
+      <div class="entry">
         <div class="entry-date">Jan 2026 to Present</div>
         <div>
-          <div class="entry-role"><strong>PhD, Computer Science</strong></div>
-          <span class="entry-place">The University of Texas at Dallas &middot; Richardson, TX</span>
+          <div class="entry-role"><strong>Ph.D., Computer Science</strong></div>
+          <span class="entry-place">The University of Texas at Dallas, Richardson, TX</span>
         </div>
-      </li>
-      <li class="entry">
+      </div>
+      <div class="entry">
         <div class="entry-date">Aug 2024 to Dec 2025</div>
         <div>
-          <div class="entry-role"><strong>PhD student, Computer Science</strong></div>
-          <span class="entry-place">University of North Carolina at Charlotte &middot; Charlotte, NC</span>
+          <div class="entry-role"><strong>Ph.D. student, Computer Science</strong></div>
+          <span class="entry-place">University of North Carolina at Charlotte, Charlotte, NC</span>
           <span class="entry-note">CGPA 4.00 on a 4.00 scale.</span>
         </div>
-      </li>
-      <li class="entry">
+      </div>
+      <div class="entry">
         <div class="entry-date">Feb 2018 to Mar 2022</div>
         <div>
           <div class="entry-role"><strong>B.Sc. in Computer Science and Engineering</strong></div>
-          <span class="entry-place">Military Institute of Science and Technology &middot; Dhaka, Bangladesh</span>
+          <span class="entry-place">Military Institute of Science and Technology, Dhaka, Bangladesh</span>
           <span class="entry-note">CGPA 3.85 on a 4.00 scale. Dean's List of Honor across all four years.</span>
         </div>
-      </li>
-    </ul>
-  </section>
+      </div>
+    </section>
 
-  <section id="experience">
-    <div class="section-title">Experience</div>
-    <ul class="entry-list">
-      <li class="entry">
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="entry">
         <div class="entry-date">Jan 2026 to Present</div>
         <div>
           <div class="entry-role"><strong>Graduate Teaching Assistant</strong></div>
           <span class="entry-place">The University of Texas at Dallas</span>
         </div>
-      </li>
-      <li class="entry">
+      </div>
+      <div class="entry">
         <div class="entry-date">Aug 2024 to Dec 2025</div>
         <div>
           <div class="entry-role"><strong>Graduate Research Assistant</strong></div>
           <span class="entry-place">University of North Carolina at Charlotte</span>
         </div>
-      </li>
-      <li class="entry">
+      </div>
+      <div class="entry">
         <div class="entry-date">Sep to Dec 2023</div>
         <div>
           <div class="entry-role"><strong>Full Stack Developer</strong></div>
           <span class="entry-place">Johns Hopkins Center for Communication Programs, Bangladesh</span>
         </div>
-      </li>
-      <li class="entry">
+      </div>
+      <div class="entry">
         <div class="entry-date">Jun to Aug 2023</div>
         <div>
           <div class="entry-role"><strong>Full Stack Developer Intern</strong></div>
-          <span class="entry-place">We Tech Global &middot; Finland</span>
+          <span class="entry-place">We Tech Global, Finland</span>
         </div>
-      </li>
-      <li class="entry">
+      </div>
+      <div class="entry">
         <div class="entry-date">Apr 2022 to Mar 2023</div>
         <div>
           <div class="entry-role"><strong>Lecturer</strong></div>
-          <span class="entry-place">Military Institute of Science and Technology &middot; Dhaka</span>
+          <span class="entry-place">Military Institute of Science and Technology, Dhaka</span>
         </div>
-      </li>
-      <li class="entry">
+      </div>
+      <div class="entry">
         <div class="entry-date">Apr to Sep 2022</div>
         <div>
           <div class="entry-role"><strong>Research Associate</strong></div>
-          <span class="entry-place">Military Institute of Science and Technology &middot; Dhaka</span>
+          <span class="entry-place">Military Institute of Science and Technology, Dhaka</span>
         </div>
-      </li>
-      <li class="entry">
+      </div>
+      <div class="entry">
         <div class="entry-date">Jan 2021</div>
         <div>
           <div class="entry-role"><strong>Industrial Trainee</strong></div>
-          <span class="entry-place">Grameenphone Limited &middot; Dhaka</span>
+          <span class="entry-place">Grameenphone Limited, Dhaka</span>
         </div>
-      </li>
-    </ul>
-  </section>
+      </div>
+    </section>
 
-  <section id="toolkit">
-    <div class="section-title">Toolkit</div>
-    <ul class="kit-list">
-      <li class="kit-label">Languages</li>
-      <li class="kit-values">Python, Java, C, C++, PL/SQL, JavaScript, Shell</li>
+    <section id="toolkit">
+      <h2>Toolkit</h2>
+      <ul class="kit-list">
+        <li class="kit-label">Languages</li>
+        <li class="kit-values">Python, Java, C, C++, PL/SQL, JavaScript, Shell</li>
 
-      <li class="kit-label">Testing and SE</li>
-      <li class="kit-values">JUnit, Defects4J, EvoSuite, PIT (Pitest), GumTree, JaCoCo, PMD, Maven, Git</li>
+        <li class="kit-label">Testing and SE</li>
+        <li class="kit-values">JUnit, Defects4J, EvoSuite, PIT (Pitest), GumTree, JaCoCo, PMD, Maven, Git</li>
 
-      <li class="kit-label">ML</li>
-      <li class="kit-values">PyTorch, TensorFlow, Keras, scikit learn, pandas, NumPy, Matplotlib, XGBoost, SciPy</li>
+        <li class="kit-label">ML</li>
+        <li class="kit-values">PyTorch, TensorFlow, Keras, scikit learn, pandas, NumPy, Matplotlib, XGBoost, SciPy</li>
 
-      <li class="kit-label">LLM</li>
-      <li class="kit-values">Hugging Face Transformers, PEFT, TRL, LangChain, LlamaIndex, vLLM, sentence transformers, CodeBERT</li>
+        <li class="kit-label">LLM</li>
+        <li class="kit-values">Hugging Face Transformers, PEFT, TRL, LangChain, LlamaIndex, vLLM, sentence transformers, CodeBERT</li>
 
-      <li class="kit-label">Local LLMs</li>
-      <li class="kit-values">Ollama, Llama 3, Mistral, CodeLlama, DeepSeek Coder, Qwen, Phi, Gemma</li>
+        <li class="kit-label">Local LLMs</li>
+        <li class="kit-values">Ollama, Llama 3, Mistral, CodeLlama, DeepSeek Coder, Qwen, Phi, Gemma</li>
 
-      <li class="kit-label">Web</li>
-      <li class="kit-values">Django REST, Laravel, .NET, Android SDK</li>
+        <li class="kit-label">Web</li>
+        <li class="kit-values">Django REST, Laravel, .NET, Android SDK</li>
 
-      <li class="kit-label">Data</li>
-      <li class="kit-values">MySQL, Oracle, SQLite, Firebase, MongoDB</li>
+        <li class="kit-label">Data</li>
+        <li class="kit-values">MySQL, Oracle, SQLite, Firebase, MongoDB</li>
 
-      <li class="kit-label">Writing</li>
-      <li class="kit-values">LaTeX, Overleaf, Beamer</li>
-    </ul>
-  </section>
+        <li class="kit-label">Writing</li>
+        <li class="kit-values">LaTeX, Overleaf, Beamer</li>
+      </ul>
+    </section>
 
-  <section id="awards">
-    <div class="section-title">Awards and Honors</div>
-    <ul class="awards-list">
-      <li class="award-item">
-        Graduated with MIST Dean's List of Honor.
-        <span class="award-note">Military Institute of Science and Technology, 2022</span>
-      </li>
-      <li class="award-item">
-        MIST Dean's List of Honor for four consecutive academic years.
-        <span class="award-note">2018, 2019, 2020, 2021</span>
-      </li>
-      <li class="award-item">
-        University Merit Scholarship across all four undergraduate levels.
-        <span class="award-note">Level 1 through Level 4</span>
-      </li>
-      <li class="award-item">
-        Second Runner Up, Regional Math Olympiad.
-        <span class="award-note">2017</span>
-      </li>
-    </ul>
-  </section>
+    <section id="honors">
+      <h2>Awards and Honors</h2>
+      <ul class="honors-list">
+        <li class="honor-item">
+          Graduated with MIST Dean's List of Honor.
+          <span class="honor-note">Military Institute of Science and Technology, 2022</span>
+        </li>
+        <li class="honor-item">
+          MIST Dean's List of Honor for four consecutive academic years.
+          <span class="honor-note">2018, 2019, 2020, 2021</span>
+        </li>
+        <li class="honor-item">
+          University Merit Scholarship across all four undergraduate levels.
+          <span class="honor-note">Level 1 through Level 4</span>
+        </li>
+        <li class="honor-item">
+          Second Runner Up, Regional Math Olympiad.
+          <span class="honor-note">2017</span>
+        </li>
+      </ul>
+    </section>
 
-</main>
+  </main>
+</div>
 
 <footer>
-  <div class="footer-line">
-    Tasfia Tasnim &middot; <a href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a>
-  </div>
-  <div class="footer-line">
-    Last updated April 2026
-  </div>
+  &copy; 2026 Tasfia Tasnim &middot; <a href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a> &middot; Last updated April 2026
 </footer>
+
+<script>
+const sections = document.querySelectorAll('.content section');
+const navLinks = document.querySelectorAll('.topnav-links a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
 
 </body>
 </html>
