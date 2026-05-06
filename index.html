@@ -9,29 +9,32 @@
 <style>
 :root {
   /* base */
-  --bg: #FBFAF6;
+  --bg: #FAFBFD;
   --bg-card: #FFFFFF;
-  --ink: #1F1B16;
-  --muted: #5C544A;
-  --faint: #8C8478;
-  --rule: #ECE7DC;
-  --rule-soft: #F2EEE5;
+  --ink: #16182A;
+  --ink-soft: #2E314A;
+  --muted: #5A5E78;
+  --faint: #8E92AC;
+  --rule: #E2E5EE;
+  --rule-soft: #EDEFF6;
 
-  /* soft research palette: lavender, mint, peach, sky, rose, sun */
-  --lav-bg: #EDE8F7;
-  --lav-ink: #5E4F8C;
-  --mint-bg: #E1F0E5;
-  --mint-ink: #437A56;
-  --peach-bg: #F8E5D6;
-  --peach-ink: #A8623A;
-  --sky-bg: #DDEAF3;
-  --sky-ink: #466B8C;
-  --rose-bg: #F5E0DF;
-  --rose-ink: #8E4A49;
-  --sun-bg: #F6EDC8;
-  --sun-ink: #8C7522;
+  /* cool palette only: lavender, lilac, periwinkle, sky, blush, slate */
+  --lav: #ECE7F6;
+  --lilac: #E8DFF1;
+  --peri: #E2E6F5;
+  --sky: #DEE9F3;
+  --blush: #F1E2EE;
+  --slate: #DEE2EC;
 
-  --link: #4F6D8C;
+  --lav-d: #6B5C9C;
+  --lilac-d: #8466A0;
+  --peri-d: #5C6FA8;
+  --sky-d: #4F779A;
+  --blush-d: #94557F;
+  --slate-d: #5A6480;
+
+  --link: #4F6D9A;
+  --link-hover: #16182A;
 
   --serif: "Times New Roman", Times, Georgia, serif;
   --sans: "Calibri", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -43,19 +46,47 @@
 html { scroll-behavior: smooth; font-size: 17px; }
 
 body {
-  background:
-    radial-gradient(ellipse at top left, rgba(94, 79, 140, 0.05), transparent 50%),
-    radial-gradient(ellipse at top right, rgba(67, 122, 86, 0.04), transparent 50%),
-    radial-gradient(ellipse at bottom, rgba(168, 98, 58, 0.03), transparent 60%),
-    var(--bg);
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--serif);
   font-weight: 400;
   line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
 }
 
-::selection { background: var(--lav-bg); color: var(--lav-ink); }
+/* CIRCUIT BOARD BACKGROUND (cool palette, no letters) */
+.bg-circuit {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-circuit svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+/* soft cool washes */
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 8%, var(--lav) 0%, transparent 22%),
+    radial-gradient(circle at 88% 14%, var(--peri) 0%, transparent 22%),
+    radial-gradient(circle at 6% 60%, var(--blush) 0%, transparent 18%),
+    radial-gradient(circle at 92% 65%, var(--sky) 0%, transparent 22%),
+    radial-gradient(circle at 50% 95%, var(--lilac) 0%, transparent 24%);
+  opacity: 0.6;
+}
+
+::selection { background: var(--lav); color: var(--ink); }
 
 a {
   color: var(--link);
@@ -63,16 +94,16 @@ a {
   transition: color 0.15s ease;
 }
 
-a:hover { color: var(--lav-ink); }
+a:hover { color: var(--link-hover); }
 
 /* TOP NAV */
 .topnav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(251, 250, 246, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(250, 251, 253, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -91,16 +122,18 @@ a:hover { color: var(--lav-ink); }
   color: var(--ink);
   font-weight: 400;
   letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .topnav-brand .dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--lav-ink), var(--peach-ink));
-  margin-right: 0.5rem;
-  vertical-align: 0.15em;
+  background: linear-gradient(135deg, var(--lav-d), var(--peri-d), var(--blush-d));
+  box-shadow: 0 0 0 3px var(--lav);
 }
 
 .topnav-links {
@@ -114,26 +147,27 @@ a:hover { color: var(--lav-ink); }
 .topnav-links a {
   color: var(--muted);
   position: relative;
-  padding-bottom: 3px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
-.topnav-links a:hover { color: var(--lav-ink); }
+.topnav-links a:hover {
+  color: var(--ink);
+  background: var(--lav);
+}
 
 .topnav-links a.active {
   color: var(--ink);
-  background: linear-gradient(90deg, var(--lav-ink), var(--peach-ink));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  border-bottom: 2px solid var(--lav-ink);
+  background: var(--lav);
+  font-weight: 600;
 }
 
 @media (max-width: 720px) {
   .topnav-inner { padding: 0.7rem 1.25rem; flex-direction: column; gap: 0.5rem; }
-  .topnav-links { gap: 1rem; font-size: 0.88rem; flex-wrap: wrap; justify-content: center; }
+  .topnav-links { gap: 0.5rem; font-size: 0.86rem; flex-wrap: wrap; justify-content: center; }
 }
 
-/* MAIN GRID */
 .layout {
   max-width: 1100px;
   margin: 0 auto;
@@ -159,91 +193,145 @@ a:hover { color: var(--lav-ink); }
   text-align: center;
 }
 
+.sidebar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 1.8rem 1.4rem 1.6rem;
+  position: relative;
+  box-shadow:
+    0 1px 2px rgba(22, 24, 42, 0.04),
+    0 8px 24px -10px rgba(22, 24, 42, 0.1);
+}
+
+.sidebar-card::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 1.4rem;
+  right: 1.4rem;
+  height: 4px;
+  background: linear-gradient(90deg, var(--lav-d), var(--peri-d), var(--blush-d), var(--sky-d));
+  border-radius: 0 0 4px 4px;
+  opacity: 0.7;
+}
+
 @media (max-width: 900px) {
-  .sidebar { position: static; text-align: center; }
+  .sidebar { position: static; }
+}
+
+.profile-frame {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1.4rem;
+}
+
+.profile-frame::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: conic-gradient(from 90deg, var(--lav), var(--peri), var(--sky), var(--lilac), var(--blush), var(--lav));
+  opacity: 0.7;
+  z-index: -1;
 }
 
 .profile-img {
-  width: 220px;
-  height: 220px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 30%, var(--lav-bg), var(--peach-bg) 70%, var(--sky-bg));
-  border: 1px solid var(--rule);
+  background: linear-gradient(135deg, var(--lav), var(--peri));
+  border: 3px solid var(--bg-card);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--serif);
-  font-size: 5rem;
+  font-size: 4.5rem;
   font-weight: 400;
-  color: var(--lav-ink);
+  color: var(--ink-soft);
   font-style: italic;
-  margin: 0 auto 1.4rem;
   overflow: hidden;
   object-fit: cover;
-  box-shadow:
-    0 8px 24px -10px rgba(94, 79, 140, 0.18),
-    0 2px 6px -2px rgba(168, 98, 58, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 img.profile-img {
   background: none;
   display: block;
-  object-fit: cover;
   font-size: 0;
 }
 
 .sidebar-name {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   line-height: 1.15;
   color: var(--ink);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .sidebar-affil {
   font-family: var(--serif);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: var(--muted);
   line-height: 1.5;
   margin-bottom: 0.4rem;
 }
 
-.sidebar-affil a { color: var(--link); }
-.sidebar-affil a:hover { color: var(--lav-ink); text-decoration: underline; }
+.sidebar-affil a { color: var(--link); border-bottom: 1px dotted var(--rule); }
+.sidebar-affil a:hover { color: var(--ink); border-bottom-color: var(--ink); }
 
 .sidebar-divider {
-  width: 60px;
+  width: 50px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--lav-ink), transparent);
-  opacity: 0.4;
-  margin: 1.2rem auto;
+  background: var(--rule);
+  margin: 1.1rem auto;
   border: none;
+  position: relative;
 }
+
+.sidebar-divider::before,
+.sidebar-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--lav-d);
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+
+.sidebar-divider::before { left: -10px; }
+.sidebar-divider::after { right: -10px; }
 
 .sidebar-email {
   font-family: var(--mono);
-  font-size: 0.85rem;
-  color: var(--lav-ink);
+  font-size: 0.82rem;
+  color: var(--ink);
   display: inline-block;
   word-break: break-all;
-  padding: 0.25rem 0.6rem;
-  background: var(--lav-bg);
+  padding: 0.3rem 0.6rem;
+  background: var(--lav);
   border-radius: 4px;
-  border: 1px solid rgba(94, 79, 140, 0.15);
+  border: 1px solid var(--rule);
+  transition: all 0.2s ease;
 }
 
 .sidebar-email:hover {
-  background: var(--lav-ink);
+  background: var(--ink);
   color: var(--bg);
+  border-color: var(--ink);
 }
 
 .sidebar-icons {
-  margin-top: 1.2rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
   font-family: var(--sans);
   font-size: 0.78rem;
@@ -251,56 +339,71 @@ img.profile-img {
 }
 
 .sidebar-icons a {
-  padding: 0.25rem 0.65rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 4px;
   text-transform: lowercase;
   letter-spacing: 0.02em;
-  transition: transform 0.15s ease;
+  color: var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--rule);
 }
 
-.sidebar-icons a:nth-child(1) { background: var(--mint-bg); color: var(--mint-ink); }
-.sidebar-icons a:nth-child(2) { background: var(--peach-bg); color: var(--peach-ink); }
-.sidebar-icons a:nth-child(3) { background: var(--sky-bg); color: var(--sky-ink); }
-.sidebar-icons a:nth-child(4) { background: var(--sun-bg); color: var(--sun-ink); }
+.sidebar-icons a:nth-child(1) { background: var(--lav); }
+.sidebar-icons a:nth-child(2) { background: var(--peri); }
+.sidebar-icons a:nth-child(3) { background: var(--sky); }
+.sidebar-icons a:nth-child(4) { background: var(--blush); }
 
-.sidebar-icons a:hover { transform: translateY(-2px); }
+.sidebar-icons a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px -2px rgba(22, 24, 42, 0.12);
+}
 
 /* MAIN CONTENT */
+.content section {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 2rem 2.2rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  position: relative;
+}
+
+.content section:last-child { margin-bottom: 0; }
+
 .content h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 1.65rem;
+  font-size: 1.6rem;
   color: var(--ink);
   margin-bottom: 1.1rem;
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--rule);
-  position: relative;
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
+  gap: 0.7rem;
 }
 
 .content h2::before {
   content: "";
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--lav-ink);
   flex-shrink: 0;
+  border: 2px solid var(--bg-card);
 }
 
-#about h2::before { background: var(--lav-ink); }
-#news h2::before { background: var(--mint-ink); }
-#interests h2::before { background: var(--peach-ink); }
-#publications h2::before { background: var(--sky-ink); }
-#teaching h2::before { background: var(--rose-ink); }
-#education h2::before { background: var(--sun-ink); }
-#experience h2::before { background: var(--mint-ink); }
-#toolkit h2::before { background: var(--lav-ink); }
-#honors h2::before { background: var(--peach-ink); }
-
-.content h2:not(:first-child) { margin-top: 3rem; }
+#about h2::before { background: var(--lav-d); box-shadow: 0 0 0 2px var(--lav-d); }
+#news h2::before { background: var(--peri-d); box-shadow: 0 0 0 2px var(--peri-d); }
+#interests h2::before { background: var(--blush-d); box-shadow: 0 0 0 2px var(--blush-d); }
+#publications h2::before { background: var(--sky-d); box-shadow: 0 0 0 2px var(--sky-d); }
+#teaching h2::before { background: var(--lilac-d); box-shadow: 0 0 0 2px var(--lilac-d); }
+#education h2::before { background: var(--slate-d); box-shadow: 0 0 0 2px var(--slate-d); }
+#experience h2::before { background: var(--peri-d); box-shadow: 0 0 0 2px var(--peri-d); }
+#toolkit h2::before { background: var(--lav-d); box-shadow: 0 0 0 2px var(--lav-d); }
+#honors h2::before { background: var(--blush-d); box-shadow: 0 0 0 2px var(--blush-d); }
 
 .content p {
   font-size: 1.05rem;
@@ -310,25 +413,30 @@ img.profile-img {
 }
 
 .content p:last-child { margin-bottom: 0; }
-
 .content em { font-style: italic; }
-.content strong { font-weight: 700; }
+.content strong { font-weight: 700; color: var(--ink); }
 
 .content a {
   color: var(--link);
-  border-bottom: 1px solid rgba(79, 109, 140, 0.3);
+  border-bottom: 1px solid var(--rule);
 }
 
 .content a:hover {
-  color: var(--lav-ink);
-  border-bottom-color: var(--lav-ink);
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
-/* highlight key phrases in bio */
-.bio .hl-lav { background: var(--lav-bg); color: var(--lav-ink); padding: 0 0.3rem; border-radius: 3px; font-style: italic; }
-.bio .hl-mint { background: var(--mint-bg); color: var(--mint-ink); padding: 0 0.3rem; border-radius: 3px; font-style: italic; }
-.bio .hl-peach { background: var(--peach-bg); color: var(--peach-ink); padding: 0 0.3rem; border-radius: 3px; font-style: italic; }
-.bio .hl-sky { background: var(--sky-bg); color: var(--sky-ink); padding: 0 0.3rem; border-radius: 3px; font-style: italic; }
+.bio span[class^="hl-"] {
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.bio .hl-lav { background: var(--lav); }
+.bio .hl-peri { background: var(--peri); }
+.bio .hl-blush { background: var(--blush); }
+.bio .hl-sky { background: var(--sky); }
 
 /* NEWS */
 .news-list {
@@ -338,13 +446,12 @@ img.profile-img {
   overflow-y: auto;
   border: 1px solid var(--rule);
   background: var(--bg-card);
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  border-radius: 8px;
 }
 
 .news-list::-webkit-scrollbar { width: 8px; }
 .news-list::-webkit-scrollbar-track { background: transparent; }
-.news-list::-webkit-scrollbar-thumb { background: var(--lav-bg); border-radius: 4px; }
+.news-list::-webkit-scrollbar-thumb { background: var(--lav); border-radius: 4px; }
 
 .news-item {
   display: grid;
@@ -353,7 +460,7 @@ img.profile-img {
   padding: 0.85rem 1rem;
   border-bottom: 1px solid var(--rule-soft);
   font-size: 0.97rem;
-  line-height: 1.5;
+  line-height: 1.55;
   align-items: baseline;
 }
 
@@ -362,17 +469,18 @@ img.profile-img {
 .news-date {
   font-family: var(--mono);
   font-size: 0.78rem;
-  color: var(--muted);
+  color: var(--ink);
   font-weight: 500;
   white-space: nowrap;
-  background: var(--rule-soft);
-  padding: 0.15rem 0.4rem;
+  background: var(--peri);
+  padding: 0.18rem 0.45rem;
   border-radius: 3px;
   text-align: center;
+  border: 1px solid var(--rule);
 }
 
 .news-text { color: var(--ink); }
-.news-text em { color: var(--peach-ink); font-style: italic; font-weight: 500; }
+.news-text em { font-style: italic; font-weight: 500; }
 
 .news-tag {
   display: inline-block;
@@ -381,9 +489,9 @@ img.profile-img {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
-  padding: 0.12rem 0.5rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 3px;
-  background: linear-gradient(135deg, var(--mint-ink), var(--sky-ink));
+  background: var(--ink);
   color: var(--bg);
   margin-right: 0.4rem;
   vertical-align: 0.12em;
@@ -393,33 +501,35 @@ img.profile-img {
   .news-item { grid-template-columns: 1fr; gap: 0.2rem; }
 }
 
-/* INTERESTS - styled like LLM tokens */
+/* INTERESTS */
 .interests {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0.5rem;
+  gap: 0.55rem;
 }
 
 .interest {
   font-family: var(--mono);
-  font-size: 0.82rem;
-  padding: 0.3rem 0.7rem;
+  font-size: 0.84rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 4px;
-  border: 1px solid transparent;
+  border: 1px solid var(--rule);
   letter-spacing: 0.01em;
-  transition: transform 0.15s ease;
+  color: var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 
-.interest:hover { transform: translateY(-2px); }
+.interest:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px -3px rgba(22, 24, 42, 0.12);
+}
 
-.interest:nth-child(8n+1) { background: var(--lav-bg); color: var(--lav-ink); border-color: rgba(94, 79, 140, 0.15); }
-.interest:nth-child(8n+2) { background: var(--mint-bg); color: var(--mint-ink); border-color: rgba(67, 122, 86, 0.15); }
-.interest:nth-child(8n+3) { background: var(--peach-bg); color: var(--peach-ink); border-color: rgba(168, 98, 58, 0.15); }
-.interest:nth-child(8n+4) { background: var(--sky-bg); color: var(--sky-ink); border-color: rgba(70, 107, 140, 0.15); }
-.interest:nth-child(8n+5) { background: var(--rose-bg); color: var(--rose-ink); border-color: rgba(142, 74, 73, 0.15); }
-.interest:nth-child(8n+6) { background: var(--sun-bg); color: var(--sun-ink); border-color: rgba(140, 117, 34, 0.15); }
-.interest:nth-child(8n+7) { background: var(--lav-bg); color: var(--lav-ink); border-color: rgba(94, 79, 140, 0.15); }
-.interest:nth-child(8n+0) { background: var(--mint-bg); color: var(--mint-ink); border-color: rgba(67, 122, 86, 0.15); }
+.interest:nth-child(6n+1) { background: var(--lav); }
+.interest:nth-child(6n+2) { background: var(--lilac); }
+.interest:nth-child(6n+3) { background: var(--peri); }
+.interest:nth-child(6n+4) { background: var(--sky); }
+.interest:nth-child(6n+5) { background: var(--blush); }
+.interest:nth-child(6n+0) { background: var(--slate); }
 
 /* PUBLICATIONS */
 .pub {
@@ -445,26 +555,25 @@ img.profile-img {
   letter-spacing: 0.04em;
   text-align: center;
   padding: 0.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
   text-transform: uppercase;
-  border: 1px solid transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
 }
 
-.pub-thumb.lav { background: var(--lav-bg); color: var(--lav-ink); border-color: rgba(94, 79, 140, 0.2); }
-.pub-thumb.mint { background: var(--mint-bg); color: var(--mint-ink); border-color: rgba(67, 122, 86, 0.2); }
-.pub-thumb.peach { background: var(--peach-bg); color: var(--peach-ink); border-color: rgba(168, 98, 58, 0.2); }
-.pub-thumb.sky { background: var(--sky-bg); color: var(--sky-ink); border-color: rgba(70, 107, 140, 0.2); }
-.pub-thumb.rose { background: var(--rose-bg); color: var(--rose-ink); border-color: rgba(142, 74, 73, 0.2); }
-.pub-thumb.sun { background: var(--sun-bg); color: var(--sun-ink); border-color: rgba(140, 117, 34, 0.2); }
+.pub-thumb.lav { background: var(--lav); }
+.pub-thumb.peri { background: var(--peri); }
+.pub-thumb.sky { background: var(--sky); }
+.pub-thumb.blush { background: var(--blush); }
 
-.pub-body { font-size: 1rem; line-height: 1.5; }
+.pub-body { font-size: 1rem; line-height: 1.55; }
 
 .pub-title {
   font-family: var(--serif);
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--ink);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
 }
 
 .pub-authors {
@@ -474,10 +583,10 @@ img.profile-img {
 }
 
 .pub-authors .self {
-  color: var(--lav-ink);
+  color: var(--ink);
   font-weight: 700;
-  background: var(--lav-bg);
-  padding: 0 0.25rem;
+  background: var(--lav);
+  padding: 0 0.3rem;
   border-radius: 2px;
 }
 
@@ -485,19 +594,20 @@ img.profile-img {
   font-style: italic;
   color: var(--muted);
   font-size: 0.94rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 .pub-venue .year {
   font-style: normal;
   font-family: var(--mono);
   font-size: 0.78rem;
-  color: var(--peach-ink);
+  color: var(--ink);
   margin-left: 0.3rem;
   font-weight: 500;
-  background: var(--peach-bg);
-  padding: 0.05rem 0.35rem;
+  background: var(--blush);
+  padding: 0.1rem 0.4rem;
   border-radius: 2px;
+  border: 1px solid var(--rule);
 }
 
 .pub-status {
@@ -507,13 +617,13 @@ img.profile-img {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
-  padding: 0.12rem 0.5rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 3px;
   margin-left: 0.4rem;
   vertical-align: 0.18em;
-  background: var(--mint-bg);
-  color: var(--mint-ink);
-  border: 1px solid rgba(67, 122, 86, 0.25);
+  background: var(--peri);
+  color: var(--ink);
+  border: 1px solid var(--rule);
 }
 
 .pub-links {
@@ -528,18 +638,18 @@ img.profile-img {
 
 .pub-links a {
   border: 1px solid var(--rule);
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem 0.65rem;
   border-radius: 4px;
   text-transform: lowercase;
   background: var(--bg-card);
-  color: var(--muted);
+  color: var(--ink);
   transition: all 0.15s ease;
 }
 
 .pub-links a:hover {
-  background: var(--lav-bg);
-  color: var(--lav-ink);
-  border-color: rgba(94, 79, 140, 0.3);
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
 }
 
 @media (max-width: 600px) {
@@ -552,12 +662,13 @@ img.profile-img {
   font-style: italic;
   font-weight: 400;
   font-size: 1.15rem;
-  color: var(--peach-ink);
-  margin: 1.3rem 0 0.3rem;
+  color: var(--ink);
+  margin: 1.4rem 0 0.4rem;
   display: inline-block;
-  padding: 0.1rem 0.6rem;
-  background: var(--peach-bg);
+  padding: 0.15rem 0.7rem;
+  background: var(--blush);
   border-radius: 4px;
+  border: 1px solid var(--rule);
 }
 
 .pub-year:first-child { margin-top: 0; }
@@ -571,16 +682,19 @@ img.profile-img {
   font-style: italic;
   font-size: 1.05rem;
   color: var(--ink);
-  margin-bottom: 0.4rem;
-  padding-left: 0.6rem;
-  border-left: 3px solid var(--rose-ink);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  background: var(--lilac);
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  display: inline-block;
 }
 
 .teach-row {
   display: grid;
   grid-template-columns: 6rem 1fr auto;
   gap: 1rem;
-  padding: 0.4rem 0;
+  padding: 0.5rem 0;
   font-size: 0.97rem;
   align-items: baseline;
   border-bottom: 1px dotted var(--rule);
@@ -591,12 +705,13 @@ img.profile-img {
 .teach-code {
   font-family: var(--mono);
   font-size: 0.8rem;
-  color: var(--rose-ink);
+  color: var(--ink);
   font-weight: 600;
-  background: var(--rose-bg);
-  padding: 0.15rem 0.45rem;
+  background: var(--lilac);
+  padding: 0.18rem 0.45rem;
   border-radius: 3px;
   text-align: center;
+  border: 1px solid var(--rule);
 }
 
 .teach-name { color: var(--ink); }
@@ -618,7 +733,7 @@ img.profile-img {
   display: grid;
   grid-template-columns: 9rem 1fr;
   gap: 1.4rem;
-  padding: 0.85rem 0;
+  padding: 0.9rem 0;
   border-bottom: 1px dotted var(--rule);
   align-items: baseline;
   font-size: 1rem;
@@ -629,15 +744,16 @@ img.profile-img {
 .entry-date {
   font-family: var(--mono);
   font-size: 0.78rem;
-  color: var(--sun-ink);
+  color: var(--ink);
   font-weight: 500;
-  background: var(--sun-bg);
-  padding: 0.2rem 0.45rem;
+  background: var(--slate);
+  padding: 0.22rem 0.5rem;
   border-radius: 3px;
   text-align: center;
+  border: 1px solid var(--rule);
 }
 
-#experience .entry-date { color: var(--mint-ink); background: var(--mint-bg); }
+#experience .entry-date { background: var(--peri); }
 
 .entry-role { color: var(--ink); }
 .entry-role strong { font-weight: 700; }
@@ -647,7 +763,7 @@ img.profile-img {
   font-style: italic;
   color: var(--muted);
   font-size: 0.94rem;
-  margin-top: 0.1rem;
+  margin-top: 0.15rem;
 }
 
 .entry-note {
@@ -677,23 +793,23 @@ img.profile-img {
   font-family: var(--mono);
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 0.25rem 0.6rem;
+  color: var(--ink);
+  padding: 0.3rem 0.6rem;
   border-radius: 4px;
   text-align: center;
   text-transform: lowercase;
+  border: 1px solid var(--rule);
 }
 
-.kit-label:nth-of-type(8n+1) { background: var(--lav-bg); color: var(--lav-ink); }
-.kit-label:nth-of-type(8n+2) { background: var(--mint-bg); color: var(--mint-ink); }
-.kit-label:nth-of-type(8n+3) { background: var(--peach-bg); color: var(--peach-ink); }
-.kit-label:nth-of-type(8n+4) { background: var(--sky-bg); color: var(--sky-ink); }
-.kit-label:nth-of-type(8n+5) { background: var(--rose-bg); color: var(--rose-ink); }
-.kit-label:nth-of-type(8n+6) { background: var(--sun-bg); color: var(--sun-ink); }
-.kit-label:nth-of-type(8n+7) { background: var(--lav-bg); color: var(--lav-ink); }
-.kit-label:nth-of-type(8n+0) { background: var(--mint-bg); color: var(--mint-ink); }
+.kit-label:nth-of-type(6n+1) { background: var(--lav); }
+.kit-label:nth-of-type(6n+2) { background: var(--lilac); }
+.kit-label:nth-of-type(6n+3) { background: var(--peri); }
+.kit-label:nth-of-type(6n+4) { background: var(--sky); }
+.kit-label:nth-of-type(6n+5) { background: var(--blush); }
+.kit-label:nth-of-type(6n+0) { background: var(--slate); }
 
 .kit-values {
-  color: var(--muted);
+  color: var(--ink);
   line-height: 1.6;
   font-family: var(--mono);
   font-size: 0.84rem;
@@ -708,7 +824,7 @@ img.profile-img {
 /* HONORS */
 .honors-list { list-style: none; padding: 0; }
 .honor-item {
-  padding: 0.6rem 0 0.6rem 1.6rem;
+  padding: 0.65rem 0 0.65rem 1.7rem;
   font-size: 1rem;
   position: relative;
   line-height: 1.55;
@@ -719,15 +835,15 @@ img.profile-img {
   content: "\2726";
   position: absolute;
   left: 0;
-  top: 0.6rem;
-  color: var(--peach-ink);
-  font-size: 0.8rem;
+  top: 0.65rem;
+  color: var(--blush-d);
+  font-size: 0.85rem;
 }
 
 .honor-note {
   display: block;
   font-family: var(--mono);
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.78rem;
   margin-top: 0.15rem;
 }
@@ -738,17 +854,17 @@ footer {
   border-top: 1px solid var(--rule);
   font-family: var(--sans);
   font-size: 0.82rem;
-  color: var(--faint);
+  color: var(--muted);
   text-align: center;
   line-height: 1.6;
+  margin-top: 2rem;
 }
 
-footer a { color: var(--lav-ink); }
-footer a:hover { color: var(--peach-ink); }
+footer a { color: var(--ink); border-bottom: 1px dotted var(--rule); }
+footer a:hover { border-bottom-color: var(--ink); }
+footer .heart { color: var(--blush-d); }
 
-footer .heart { color: var(--rose-ink); }
-
-/* import mono font */
+/* fonts */
 @font-face {
   font-family: 'JetBrains Mono';
   src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2');
@@ -766,6 +882,278 @@ footer .heart { color: var(--rose-ink); }
 </head>
 <body>
 
+<!-- CIRCUIT BOARD: cool palette, no text, brain-shaped central node -->
+<div class="bg-circuit">
+  <svg viewBox="0 0 1600 2400" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dotgrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+        <circle cx="16" cy="16" r="0.8" fill="#B8BED1"/>
+      </pattern>
+    </defs>
+
+    <rect width="1600" height="2400" fill="url(#dotgrid)" opacity="0.45"/>
+
+    <!-- horizontal traces -->
+    <g stroke="#BFC5DC" stroke-width="1.4" fill="none" opacity="0.55">
+      <path d="M 0 180 L 240 180 L 280 220 L 480 220 L 520 180 L 800 180"/>
+      <path d="M 1600 320 L 1380 320 L 1340 360 L 1100 360 L 1060 320 L 900 320"/>
+      <path d="M 0 540 L 180 540 L 220 580 L 380 580"/>
+      <path d="M 1600 680 L 1420 680 L 1380 720 L 1260 720"/>
+      <path d="M 0 920 L 220 920 L 260 880 L 460 880 L 500 920 L 720 920"/>
+      <path d="M 1600 1060 L 1380 1060 L 1340 1100 L 1180 1100 L 1140 1060 L 980 1060"/>
+      <path d="M 0 1500 L 240 1500 L 280 1540 L 460 1540"/>
+      <path d="M 1600 1620 L 1400 1620 L 1360 1660 L 1240 1660"/>
+      <path d="M 0 1860 L 200 1860 L 240 1820 L 420 1820 L 460 1860 L 680 1860"/>
+      <path d="M 1600 2000 L 1380 2000 L 1340 2040 L 1180 2040"/>
+      <path d="M 0 2260 L 280 2260 L 320 2220 L 540 2220"/>
+    </g>
+
+    <!-- vertical traces -->
+    <g stroke="#CFD3E4" stroke-width="1" fill="none" opacity="0.45">
+      <path d="M 100 0 L 100 240 L 140 280 L 140 480"/>
+      <path d="M 1480 0 L 1480 200 L 1440 240 L 1440 420"/>
+      <path d="M 360 0 L 360 140 L 400 180 L 400 380"/>
+      <path d="M 1200 200 L 1200 460 L 1160 500 L 1160 720"/>
+      <path d="M 80 600 L 80 920 L 120 960 L 120 1180"/>
+      <path d="M 1500 580 L 1500 880 L 1460 920 L 1460 1140"/>
+      <path d="M 360 1180 L 360 1500 L 400 1540 L 400 1740"/>
+      <path d="M 1280 1280 L 1280 1580 L 1240 1620 L 1240 1820"/>
+      <path d="M 100 1580 L 100 1860 L 140 1900 L 140 2120"/>
+      <path d="M 1500 1700 L 1500 2000 L 1460 2040 L 1460 2260"/>
+      <path d="M 600 1880 L 600 2140"/>
+      <path d="M 980 2000 L 980 2260"/>
+    </g>
+
+    <!-- solder pads (vias) -->
+    <g fill="#DDE0EF" stroke="#A8AECB" stroke-width="1" opacity="0.7">
+      <circle cx="240" cy="180" r="3.5"/>
+      <circle cx="280" cy="220" r="3.5"/>
+      <circle cx="480" cy="220" r="3.5"/>
+      <circle cx="520" cy="180" r="3.5"/>
+      <circle cx="800" cy="180" r="3.5"/>
+      <circle cx="1380" cy="320" r="3.5"/>
+      <circle cx="1340" cy="360" r="3.5"/>
+      <circle cx="1100" cy="360" r="3.5"/>
+      <circle cx="1060" cy="320" r="3.5"/>
+      <circle cx="900" cy="320" r="3.5"/>
+      <circle cx="180" cy="540" r="3.5"/>
+      <circle cx="220" cy="580" r="3.5"/>
+      <circle cx="1420" cy="680" r="3.5"/>
+      <circle cx="1380" cy="720" r="3.5"/>
+      <circle cx="220" cy="920" r="3.5"/>
+      <circle cx="260" cy="880" r="3.5"/>
+      <circle cx="460" cy="880" r="3.5"/>
+      <circle cx="500" cy="920" r="3.5"/>
+      <circle cx="720" cy="920" r="3.5"/>
+      <circle cx="1380" cy="1060" r="3.5"/>
+      <circle cx="1340" cy="1100" r="3.5"/>
+      <circle cx="1180" cy="1100" r="3.5"/>
+      <circle cx="1140" cy="1060" r="3.5"/>
+      <circle cx="980" cy="1060" r="3.5"/>
+      <circle cx="240" cy="1500" r="3.5"/>
+      <circle cx="280" cy="1540" r="3.5"/>
+      <circle cx="1400" cy="1620" r="3.5"/>
+      <circle cx="1360" cy="1660" r="3.5"/>
+      <circle cx="200" cy="1860" r="3.5"/>
+      <circle cx="240" cy="1820" r="3.5"/>
+      <circle cx="420" cy="1820" r="3.5"/>
+      <circle cx="460" cy="1860" r="3.5"/>
+      <circle cx="680" cy="1860" r="3.5"/>
+      <circle cx="1380" cy="2000" r="3.5"/>
+      <circle cx="1340" cy="2040" r="3.5"/>
+      <circle cx="280" cy="2260" r="3.5"/>
+      <circle cx="320" cy="2220" r="3.5"/>
+      <circle cx="100" cy="240" r="3.5"/>
+      <circle cx="140" cy="280" r="3.5"/>
+      <circle cx="1480" cy="200" r="3.5"/>
+      <circle cx="1440" cy="240" r="3.5"/>
+      <circle cx="360" cy="140" r="3.5"/>
+      <circle cx="400" cy="180" r="3.5"/>
+      <circle cx="1200" cy="460" r="3.5"/>
+      <circle cx="1160" cy="500" r="3.5"/>
+    </g>
+
+    <!-- chip rectangles (no labels, just shapes with little IC pins) -->
+    <g fill="#ECE7F6" stroke="#A89AC4" stroke-width="1.4" opacity="0.85">
+      <rect x="80" y="320" width="120" height="60" rx="4"/>
+      <rect x="1320" y="480" width="160" height="80" rx="4"/>
+      <rect x="60" y="1180" width="140" height="70" rx="4"/>
+      <rect x="1340" y="1280" width="180" height="90" rx="4"/>
+      <rect x="80" y="2080" width="160" height="80" rx="4"/>
+      <rect x="1340" y="2180" width="160" height="80" rx="4"/>
+    </g>
+
+    <!-- chip pins (little tabs on chip edges) -->
+    <g stroke="#A89AC4" stroke-width="1" opacity="0.7">
+      <line x1="100" y1="320" x2="100" y2="312"/>
+      <line x1="115" y1="320" x2="115" y2="312"/>
+      <line x1="130" y1="320" x2="130" y2="312"/>
+      <line x1="145" y1="320" x2="145" y2="312"/>
+      <line x1="160" y1="320" x2="160" y2="312"/>
+      <line x1="175" y1="320" x2="175" y2="312"/>
+      <line x1="100" y1="380" x2="100" y2="388"/>
+      <line x1="115" y1="380" x2="115" y2="388"/>
+      <line x1="130" y1="380" x2="130" y2="388"/>
+      <line x1="145" y1="380" x2="145" y2="388"/>
+      <line x1="160" y1="380" x2="160" y2="388"/>
+      <line x1="175" y1="380" x2="175" y2="388"/>
+
+      <line x1="1340" y1="480" x2="1340" y2="472"/>
+      <line x1="1360" y1="480" x2="1360" y2="472"/>
+      <line x1="1380" y1="480" x2="1380" y2="472"/>
+      <line x1="1400" y1="480" x2="1400" y2="472"/>
+      <line x1="1420" y1="480" x2="1420" y2="472"/>
+      <line x1="1440" y1="480" x2="1440" y2="472"/>
+      <line x1="1460" y1="480" x2="1460" y2="472"/>
+      <line x1="1340" y1="560" x2="1340" y2="568"/>
+      <line x1="1360" y1="560" x2="1360" y2="568"/>
+      <line x1="1380" y1="560" x2="1380" y2="568"/>
+      <line x1="1400" y1="560" x2="1400" y2="568"/>
+      <line x1="1420" y1="560" x2="1420" y2="568"/>
+      <line x1="1440" y1="560" x2="1440" y2="568"/>
+      <line x1="1460" y1="560" x2="1460" y2="568"/>
+    </g>
+
+    <!-- BRAIN ICON: central feature, soft lavender/blush, anatomical-ish stylized -->
+    <g transform="translate(800, 940)" opacity="0.9">
+      <!-- traces leading into brain from all sides -->
+      <g stroke="#A89AC4" stroke-width="1.4" fill="none" opacity="0.6">
+        <path d="M -200 0 L -130 0 L -110 -20 L -90 -20"/>
+        <path d="M 200 0 L 130 0 L 110 -20 L 90 -20"/>
+        <path d="M -180 -120 L -110 -120 L -90 -100"/>
+        <path d="M 180 -120 L 110 -120 L 90 -100"/>
+        <path d="M -180 130 L -110 130 L -90 110"/>
+        <path d="M 180 130 L 110 130 L 90 110"/>
+      </g>
+
+      <!-- brain body: two hemispheres made of organic curves -->
+      <g fill="#EDE6F4" stroke="#7E6CAA" stroke-width="2">
+        <!-- left hemisphere -->
+        <path d="M -10 -100
+                 C -50 -110, -90 -90, -100 -60
+                 C -120 -55, -125 -25, -110 -10
+                 C -130 5, -125 30, -105 40
+                 C -110 70, -85 90, -60 88
+                 C -50 105, -25 105, -10 90
+                 L -10 -100 Z"/>
+        <!-- right hemisphere -->
+        <path d="M 10 -100
+                 C 50 -110, 90 -90, 100 -60
+                 C 120 -55, 125 -25, 110 -10
+                 C 130 5, 125 30, 105 40
+                 C 110 70, 85 90, 60 88
+                 C 50 105, 25 105, 10 90
+                 L 10 -100 Z"/>
+      </g>
+
+      <!-- gyri (folds) on each hemisphere -->
+      <g fill="none" stroke="#7E6CAA" stroke-width="1.2" opacity="0.85">
+        <path d="M -85 -55 C -70 -60, -55 -45, -50 -25"/>
+        <path d="M -100 -25 C -75 -20, -65 0, -75 20"/>
+        <path d="M -90 25 C -65 25, -50 45, -55 70"/>
+        <path d="M -55 -75 C -40 -65, -35 -40, -45 -20"/>
+        <path d="M -40 0 C -25 5, -20 30, -35 50"/>
+        <path d="M -25 -85 L -25 90"/>
+
+        <path d="M 85 -55 C 70 -60, 55 -45, 50 -25"/>
+        <path d="M 100 -25 C 75 -20, 65 0, 75 20"/>
+        <path d="M 90 25 C 65 25, 50 45, 55 70"/>
+        <path d="M 55 -75 C 40 -65, 35 -40, 45 -20"/>
+        <path d="M 40 0 C 25 5, 20 30, 35 50"/>
+        <path d="M 25 -85 L 25 90"/>
+      </g>
+
+      <!-- glowing neuron dots scattered on brain -->
+      <g fill="#9484BD">
+        <circle cx="-70" cy="-40" r="2.5"/>
+        <circle cx="-80" cy="10" r="2.5"/>
+        <circle cx="-50" cy="50" r="2.5"/>
+        <circle cx="-30" cy="-60" r="2.5"/>
+        <circle cx="-40" cy="20" r="2.5"/>
+        <circle cx="70" cy="-40" r="2.5"/>
+        <circle cx="80" cy="10" r="2.5"/>
+        <circle cx="50" cy="50" r="2.5"/>
+        <circle cx="30" cy="-60" r="2.5"/>
+        <circle cx="40" cy="20" r="2.5"/>
+      </g>
+
+      <!-- connecting "synapse" lines between neurons (dashed, faint) -->
+      <g stroke="#9484BD" stroke-width="0.8" stroke-dasharray="2 3" fill="none" opacity="0.55">
+        <line x1="-70" y1="-40" x2="70" y2="-40"/>
+        <line x1="-80" y1="10" x2="80" y2="10"/>
+        <line x1="-50" y1="50" x2="50" y2="50"/>
+        <line x1="-30" y1="-60" x2="30" y2="-60"/>
+        <line x1="-40" y1="20" x2="40" y2="20"/>
+      </g>
+
+      <!-- via terminals where traces enter the brain -->
+      <g fill="#DDE0EF" stroke="#A8AECB" stroke-width="1">
+        <circle cx="-90" cy="-20" r="3.5"/>
+        <circle cx="90" cy="-20" r="3.5"/>
+        <circle cx="-90" cy="-100" r="3.5"/>
+        <circle cx="90" cy="-100" r="3.5"/>
+        <circle cx="-90" cy="110" r="3.5"/>
+        <circle cx="90" cy="110" r="3.5"/>
+      </g>
+    </g>
+
+    <!-- second smaller brain icon, lower right area, faded -->
+    <g transform="translate(1280, 1880) scale(0.5)" opacity="0.4">
+      <g fill="#F0E5EE" stroke="#A07A98" stroke-width="2.5">
+        <path d="M -10 -100
+                 C -50 -110, -90 -90, -100 -60
+                 C -120 -55, -125 -25, -110 -10
+                 C -130 5, -125 30, -105 40
+                 C -110 70, -85 90, -60 88
+                 C -50 105, -25 105, -10 90
+                 L -10 -100 Z"/>
+        <path d="M 10 -100
+                 C 50 -110, 90 -90, 100 -60
+                 C 120 -55, 125 -25, 110 -10
+                 C 130 5, 125 30, 105 40
+                 C 110 70, 85 90, 60 88
+                 C 50 105, 25 105, 10 90
+                 L 10 -100 Z"/>
+      </g>
+    </g>
+
+    <!-- third tiny brain, top right area -->
+    <g transform="translate(280, 480) scale(0.35)" opacity="0.4">
+      <g fill="#E5E8F4" stroke="#7E8AB0" stroke-width="3">
+        <path d="M -10 -100
+                 C -50 -110, -90 -90, -100 -60
+                 C -120 -55, -125 -25, -110 -10
+                 C -130 5, -125 30, -105 40
+                 C -110 70, -85 90, -60 88
+                 C -50 105, -25 105, -10 90
+                 L -10 -100 Z"/>
+        <path d="M 10 -100
+                 C 50 -110, 90 -90, 100 -60
+                 C 120 -55, 125 -25, 110 -10
+                 C 130 5, 125 30, 105 40
+                 C 110 70, 85 90, 60 88
+                 C 50 105, 25 105, 10 90
+                 L 10 -100 Z"/>
+      </g>
+    </g>
+
+    <!-- corner mounting holes -->
+    <g stroke="#A8AECB" stroke-width="1" fill="none" opacity="0.4">
+      <circle cx="160" cy="80" r="14"/>
+      <circle cx="160" cy="80" r="6"/>
+      <circle cx="1440" cy="100" r="14"/>
+      <circle cx="1440" cy="100" r="6"/>
+      <circle cx="160" cy="2320" r="14"/>
+      <circle cx="160" cy="2320" r="6"/>
+      <circle cx="1440" cy="2350" r="14"/>
+      <circle cx="1440" cy="2350" r="6"/>
+    </g>
+
+  </svg>
+</div>
+
+<div class="bg-glow"></div>
+
 <nav class="topnav">
   <div class="topnav-inner">
     <a href="#" class="topnav-brand"><span class="dot"></span>Tasfia Tasnim</a>
@@ -781,19 +1169,23 @@ footer .heart { color: var(--rose-ink); }
 <div class="layout">
 
   <aside class="sidebar">
-    <img src="profile.png" alt="Tasfia Tasnim" class="profile-img" />
-    <h1 class="sidebar-name">Tasfia Tasnim</h1>
-    <div class="sidebar-affil">
-      Ph.D. Student, Computer Science<br/>
-      <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>
-    </div>
-    <hr class="sidebar-divider"/>
-    <a class="sidebar-email" href="mailto:txt230023@gmail.com">txt230023@gmail.com</a>
-    <div class="sidebar-icons">
-      <a href="#">scholar</a>
-      <a href="#">github</a>
-      <a href="#">linkedin</a>
-      <a href="#">cv</a>
+    <div class="sidebar-card">
+      <div class="profile-frame">
+        <img src="profile.png" alt="Tasfia Tasnim" class="profile-img" />
+      </div>
+      <h1 class="sidebar-name">Tasfia Tasnim</h1>
+      <div class="sidebar-affil">
+        Ph.D. Student, Computer Science<br/>
+        <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>
+      </div>
+      <hr class="sidebar-divider"/>
+      <a class="sidebar-email" href="mailto:txt230023@gmail.com">txt230023@gmail.com</a>
+      <div class="sidebar-icons">
+        <a href="#">scholar</a>
+        <a href="#">github</a>
+        <a href="#">linkedin</a>
+        <a href="#">cv</a>
+      </div>
     </div>
   </aside>
 
@@ -806,7 +1198,7 @@ footer .heart { color: var(--rose-ink); }
           I am a Ph.D. student in the Department of Computer Science at <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>. Before UTD, I was a graduate research assistant at the <a href="https://www.uncc.edu/">University of North Carolina at Charlotte</a> from 2024 to 2025, and earlier served as a Lecturer at the Military Institute of Science and Technology in Dhaka, Bangladesh.
         </p>
         <p>
-          My research lives at the intersection of <span class="hl-lav">software testing</span> and <span class="hl-mint">large language models</span>, with a growing focus on the <span class="hl-peach">trustworthiness</span> and <span class="hl-sky">explainability</span> of LLMs in correctness critical software tasks. Concretely, I work on automated test oracle generation, mutation testing, and the evaluation of LLM based program repair. I am interested in the question of when we can actually trust what a model produces, and what principled measurements of that trust should look like.
+          My research lives at the intersection of <span class="hl-lav">software testing</span> and <span class="hl-peri">large language models</span>, with a growing focus on the <span class="hl-blush">trustworthiness</span> and <span class="hl-sky">explainability</span> of LLMs in correctness critical software tasks. Concretely, I work on automated test oracle generation, mutation testing, and the evaluation of LLM based program repair. I am interested in the question of when we can actually trust what a model produces, and what principled measurements of that trust should look like.
         </p>
         <p>
           Outside of research, I enjoy reading, cooking, and long walks with my husband.
@@ -863,7 +1255,6 @@ footer .heart { color: var(--rose-ink); }
         <span class="interest">large language models</span>
         <span class="interest">LLM explainability</span>
         <span class="interest">applications of LLMs</span>
-        <span class="interest">artificial intelligence</span>
         <span class="interest">benchmark design</span>
         <span class="interest">empirical studies</span>
         <span class="interest">healthcare</span>
@@ -894,7 +1285,7 @@ footer .heart { color: var(--rose-ink); }
       <div class="pub-year">2023</div>
 
       <article class="pub">
-        <div class="pub-thumb mint">Predictis<br/>BMC HSR</div>
+        <div class="pub-thumb peri">Predictis<br/>BMC HSR</div>
         <div class="pub-body">
           <div class="pub-title">Predictis: an IoT and machine learning based system to predict risk level of cardio vascular diseases</div>
           <div class="pub-authors">
@@ -911,7 +1302,7 @@ footer .heart { color: var(--rose-ink); }
       <div class="pub-year">2022</div>
 
       <article class="pub">
-        <div class="pub-thumb peach">Cervical<br/>Cancer<br/>Review</div>
+        <div class="pub-thumb blush">Cervical<br/>Cancer<br/>Review</div>
         <div class="pub-body">
           <div class="pub-title">Digital Health Interventions for Cervical Cancer Care: A Systematic Review and Future Research Opportunities</div>
           <div class="pub-authors">
