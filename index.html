@@ -8,17 +8,34 @@
 
 <style>
 :root {
-  --bg: #FFFFFF;
-  --bg-alt: #F8F7F4;
-  --ink: #1A1A1A;
-  --muted: #555555;
-  --faint: #888888;
-  --rule: #E5E5E5;
-  --accent: #B7472A;
+  /* base */
+  --bg: #FBFAF6;
+  --bg-card: #FFFFFF;
+  --ink: #1F1B16;
+  --muted: #5C544A;
+  --faint: #8C8478;
+  --rule: #ECE7DC;
+  --rule-soft: #F2EEE5;
+
+  /* soft research palette: lavender, mint, peach, sky, rose, sun */
+  --lav-bg: #EDE8F7;
+  --lav-ink: #5E4F8C;
+  --mint-bg: #E1F0E5;
+  --mint-ink: #437A56;
+  --peach-bg: #F8E5D6;
+  --peach-ink: #A8623A;
+  --sky-bg: #DDEAF3;
+  --sky-ink: #466B8C;
+  --rose-bg: #F5E0DF;
+  --rose-ink: #8E4A49;
+  --sun-bg: #F6EDC8;
+  --sun-ink: #8C7522;
+
   --link: #4F6D8C;
 
   --serif: "Times New Roman", Times, Georgia, serif;
   --sans: "Calibri", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "Courier New", Courier, monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,14 +43,19 @@
 html { scroll-behavior: smooth; font-size: 17px; }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse at top left, rgba(94, 79, 140, 0.05), transparent 50%),
+    radial-gradient(ellipse at top right, rgba(67, 122, 86, 0.04), transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(168, 98, 58, 0.03), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--serif);
   font-weight: 400;
   line-height: 1.6;
 }
 
-::selection { background: var(--accent); color: var(--bg); }
+::selection { background: var(--lav-bg); color: var(--lav-ink); }
 
 a {
   color: var(--link);
@@ -41,16 +63,16 @@ a {
   transition: color 0.15s ease;
 }
 
-a:hover { color: var(--accent); }
+a:hover { color: var(--lav-ink); }
 
 /* TOP NAV */
 .topnav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(251, 250, 246, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -71,6 +93,16 @@ a:hover { color: var(--accent); }
   letter-spacing: 0.01em;
 }
 
+.topnav-brand .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lav-ink), var(--peach-ink));
+  margin-right: 0.5rem;
+  vertical-align: 0.15em;
+}
+
 .topnav-links {
   display: flex;
   gap: 1.6rem;
@@ -82,16 +114,18 @@ a:hover { color: var(--accent); }
 .topnav-links a {
   color: var(--muted);
   position: relative;
-  padding-bottom: 2px;
+  padding-bottom: 3px;
 }
 
-.topnav-links a:hover {
-  color: var(--accent);
-}
+.topnav-links a:hover { color: var(--lav-ink); }
 
 .topnav-links a.active {
   color: var(--ink);
-  border-bottom: 2px solid var(--accent);
+  background: linear-gradient(90deg, var(--lav-ink), var(--peach-ink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-bottom: 2px solid var(--lav-ink);
 }
 
 @media (max-width: 720px) {
@@ -126,17 +160,15 @@ a:hover { color: var(--accent); }
 }
 
 @media (max-width: 900px) {
-  .sidebar {
-    position: static;
-    text-align: center;
-  }
+  .sidebar { position: static; text-align: center; }
 }
 
 .profile-img {
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  background: var(--bg-alt);
+  background:
+    radial-gradient(circle at 30% 30%, var(--lav-bg), var(--peach-bg) 70%, var(--sky-bg));
   border: 1px solid var(--rule);
   display: flex;
   align-items: center;
@@ -144,17 +176,20 @@ a:hover { color: var(--accent); }
   font-family: var(--serif);
   font-size: 5rem;
   font-weight: 400;
-  color: var(--accent);
+  color: var(--lav-ink);
   font-style: italic;
   margin: 0 auto 1.4rem;
   overflow: hidden;
   object-fit: cover;
+  box-shadow:
+    0 8px 24px -10px rgba(94, 79, 140, 0.18),
+    0 2px 6px -2px rgba(168, 98, 58, 0.1);
 }
 
 .sidebar-name {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 1.55rem;
+  font-size: 1.6rem;
   line-height: 1.15;
   color: var(--ink);
   margin-bottom: 0.5rem;
@@ -168,70 +203,97 @@ a:hover { color: var(--accent); }
   margin-bottom: 0.4rem;
 }
 
-.sidebar-affil a {
-  color: var(--link);
-}
-
-.sidebar-affil a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
+.sidebar-affil a { color: var(--link); }
+.sidebar-affil a:hover { color: var(--lav-ink); text-decoration: underline; }
 
 .sidebar-divider {
-  width: 40px;
+  width: 60px;
   height: 1px;
-  background: var(--rule);
+  background: linear-gradient(90deg, transparent, var(--lav-ink), transparent);
+  opacity: 0.4;
   margin: 1.2rem auto;
   border: none;
 }
 
 .sidebar-email {
-  font-family: var(--serif);
-  font-size: 0.98rem;
-  color: var(--link);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--lav-ink);
   display: inline-block;
   word-break: break-all;
+  padding: 0.25rem 0.6rem;
+  background: var(--lav-bg);
+  border-radius: 4px;
+  border: 1px solid rgba(94, 79, 140, 0.15);
 }
 
 .sidebar-email:hover {
-  color: var(--accent);
-  text-decoration: underline;
+  background: var(--lav-ink);
+  color: var(--bg);
 }
 
 .sidebar-icons {
   margin-top: 1.2rem;
   display: flex;
   justify-content: center;
-  gap: 1.1rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
   font-family: var(--sans);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .sidebar-icons a {
-  color: var(--muted);
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 1px;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease;
 }
 
-.sidebar-icons a:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
+.sidebar-icons a:nth-child(1) { background: var(--mint-bg); color: var(--mint-ink); }
+.sidebar-icons a:nth-child(2) { background: var(--peach-bg); color: var(--peach-ink); }
+.sidebar-icons a:nth-child(3) { background: var(--sky-bg); color: var(--sky-ink); }
+.sidebar-icons a:nth-child(4) { background: var(--sun-bg); color: var(--sun-ink); }
+
+.sidebar-icons a:hover { transform: translateY(-2px); }
 
 /* MAIN CONTENT */
 .content h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 1.55rem;
+  font-size: 1.65rem;
   color: var(--ink);
   margin-bottom: 1.1rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--rule);
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
 }
 
-.content h2:not(:first-child) {
-  margin-top: 3rem;
+.content h2::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lav-ink);
+  flex-shrink: 0;
 }
+
+#about h2::before { background: var(--lav-ink); }
+#news h2::before { background: var(--mint-ink); }
+#interests h2::before { background: var(--peach-ink); }
+#publications h2::before { background: var(--sky-ink); }
+#teaching h2::before { background: var(--rose-ink); }
+#education h2::before { background: var(--sun-ink); }
+#experience h2::before { background: var(--mint-ink); }
+#toolkit h2::before { background: var(--lav-ink); }
+#honors h2::before { background: var(--peach-ink); }
+
+.content h2:not(:first-child) { margin-top: 3rem; }
 
 .content p {
   font-size: 1.05rem;
@@ -242,13 +304,8 @@ a:hover { color: var(--accent); }
 
 .content p:last-child { margin-bottom: 0; }
 
-.content em {
-  font-style: italic;
-}
-
-.content strong {
-  font-weight: 700;
-}
+.content em { font-style: italic; }
+.content strong { font-weight: 700; }
 
 .content a {
   color: var(--link);
@@ -256,9 +313,15 @@ a:hover { color: var(--accent); }
 }
 
 .content a:hover {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  color: var(--lav-ink);
+  border-bottom-color: var(--lav-ink);
 }
+
+/* highlight key phrases in bio */
+.bio .hl-lav { background: var(--lav-bg); color: var(--lav-ink); padding: 0 0.3rem; border-radius: 3px; font-style: italic; }
+.bio .hl-mint { background: var(--mint-bg); color: var(--mint-ink); padding: 0 0.3rem; border-radius: 3px; font-style: italic; }
+.bio .hl-peach { background: var(--peach-bg); color: var(--peach-ink); padding: 0 0.3rem; border-radius: 3px; font-style: italic; }
+.bio .hl-sky { background: var(--sky-bg); color: var(--sky-ink); padding: 0 0.3rem; border-radius: 3px; font-style: italic; }
 
 /* NEWS */
 .news-list {
@@ -266,30 +329,22 @@ a:hover { color: var(--accent); }
   padding: 0;
   max-height: 360px;
   overflow-y: auto;
-  padding-right: 0.5rem;
   border: 1px solid var(--rule);
-  background: var(--bg-alt);
+  background: var(--bg-card);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 
-.news-list::-webkit-scrollbar {
-  width: 6px;
-}
-
-.news-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.news-list::-webkit-scrollbar-thumb {
-  background: var(--rule);
-  border-radius: 3px;
-}
+.news-list::-webkit-scrollbar { width: 8px; }
+.news-list::-webkit-scrollbar-track { background: transparent; }
+.news-list::-webkit-scrollbar-thumb { background: var(--lav-bg); border-radius: 4px; }
 
 .news-item {
   display: grid;
   grid-template-columns: 6.5rem 1fr;
   gap: 1.2rem;
   padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule-soft);
   font-size: 0.97rem;
   line-height: 1.5;
   align-items: baseline;
@@ -298,16 +353,19 @@ a:hover { color: var(--accent); }
 .news-item:last-child { border-bottom: none; }
 
 .news-date {
-  font-family: var(--sans);
-  font-size: 0.82rem;
-  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
   font-weight: 500;
   white-space: nowrap;
+  background: var(--rule-soft);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  text-align: center;
 }
 
 .news-text { color: var(--ink); }
-
-.news-text em { color: var(--accent); font-style: italic; }
+.news-text em { color: var(--peach-ink); font-style: italic; font-weight: 500; }
 
 .news-tag {
   display: inline-block;
@@ -316,9 +374,9 @@ a:hover { color: var(--accent); }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
-  padding: 0.1rem 0.45rem;
-  border-radius: 2px;
-  background: var(--accent);
+  padding: 0.12rem 0.5rem;
+  border-radius: 3px;
+  background: linear-gradient(135deg, var(--mint-ink), var(--sky-ink));
   color: var(--bg);
   margin-right: 0.4rem;
   vertical-align: 0.12em;
@@ -327,6 +385,34 @@ a:hover { color: var(--accent); }
 @media (max-width: 600px) {
   .news-item { grid-template-columns: 1fr; gap: 0.2rem; }
 }
+
+/* INTERESTS - styled like LLM tokens */
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.5rem;
+}
+
+.interest {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  letter-spacing: 0.01em;
+  transition: transform 0.15s ease;
+}
+
+.interest:hover { transform: translateY(-2px); }
+
+.interest:nth-child(8n+1) { background: var(--lav-bg); color: var(--lav-ink); border-color: rgba(94, 79, 140, 0.15); }
+.interest:nth-child(8n+2) { background: var(--mint-bg); color: var(--mint-ink); border-color: rgba(67, 122, 86, 0.15); }
+.interest:nth-child(8n+3) { background: var(--peach-bg); color: var(--peach-ink); border-color: rgba(168, 98, 58, 0.15); }
+.interest:nth-child(8n+4) { background: var(--sky-bg); color: var(--sky-ink); border-color: rgba(70, 107, 140, 0.15); }
+.interest:nth-child(8n+5) { background: var(--rose-bg); color: var(--rose-ink); border-color: rgba(142, 74, 73, 0.15); }
+.interest:nth-child(8n+6) { background: var(--sun-bg); color: var(--sun-ink); border-color: rgba(140, 117, 34, 0.15); }
+.interest:nth-child(8n+7) { background: var(--lav-bg); color: var(--lav-ink); border-color: rgba(94, 79, 140, 0.15); }
+.interest:nth-child(8n+0) { background: var(--mint-bg); color: var(--mint-ink); border-color: rgba(67, 122, 86, 0.15); }
 
 /* PUBLICATIONS */
 .pub {
@@ -343,26 +429,28 @@ a:hover { color: var(--accent); }
 .pub-thumb {
   width: 100%;
   aspect-ratio: 4 / 3;
-  background: var(--bg-alt);
-  border: 1px solid var(--rule);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--sans);
+  font-family: var(--mono);
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   text-align: center;
   padding: 0.5rem;
-  border-radius: 2px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
 }
 
-.pub-body {
-  font-size: 1rem;
-  line-height: 1.5;
-}
+.pub-thumb.lav { background: var(--lav-bg); color: var(--lav-ink); border-color: rgba(94, 79, 140, 0.2); }
+.pub-thumb.mint { background: var(--mint-bg); color: var(--mint-ink); border-color: rgba(67, 122, 86, 0.2); }
+.pub-thumb.peach { background: var(--peach-bg); color: var(--peach-ink); border-color: rgba(168, 98, 58, 0.2); }
+.pub-thumb.sky { background: var(--sky-bg); color: var(--sky-ink); border-color: rgba(70, 107, 140, 0.2); }
+.pub-thumb.rose { background: var(--rose-bg); color: var(--rose-ink); border-color: rgba(142, 74, 73, 0.2); }
+.pub-thumb.sun { background: var(--sun-bg); color: var(--sun-ink); border-color: rgba(140, 117, 34, 0.2); }
+
+.pub-body { font-size: 1rem; line-height: 1.5; }
 
 .pub-title {
   font-family: var(--serif);
@@ -379,11 +467,11 @@ a:hover { color: var(--accent); }
 }
 
 .pub-authors .self {
-  color: var(--accent);
+  color: var(--lav-ink);
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--rule);
-  text-underline-offset: 2px;
+  background: var(--lav-bg);
+  padding: 0 0.25rem;
+  border-radius: 2px;
 }
 
 .pub-venue {
@@ -395,11 +483,14 @@ a:hover { color: var(--accent); }
 
 .pub-venue .year {
   font-style: normal;
-  font-family: var(--sans);
-  font-size: 0.82rem;
-  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--peach-ink);
   margin-left: 0.3rem;
   font-weight: 500;
+  background: var(--peach-bg);
+  padding: 0.05rem 0.35rem;
+  border-radius: 2px;
 }
 
 .pub-status {
@@ -409,12 +500,13 @@ a:hover { color: var(--accent); }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
-  padding: 0.1rem 0.45rem;
-  border-radius: 2px;
+  padding: 0.12rem 0.5rem;
+  border-radius: 3px;
   margin-left: 0.4rem;
   vertical-align: 0.18em;
-  background: #2F4A36;
-  color: #EAE5D6;
+  background: var(--mint-bg);
+  color: var(--mint-ink);
+  border: 1px solid rgba(67, 122, 86, 0.25);
 }
 
 .pub-links {
@@ -424,21 +516,23 @@ a:hover { color: var(--accent); }
   font-family: var(--sans);
   font-size: 0.78rem;
   font-weight: 600;
+  margin-top: 0.4rem;
 }
 
 .pub-links a {
-  color: var(--accent);
   border: 1px solid var(--rule);
-  padding: 0.15rem 0.55rem;
-  border-radius: 3px;
-  background: var(--bg);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
   text-transform: lowercase;
+  background: var(--bg-card);
+  color: var(--muted);
+  transition: all 0.15s ease;
 }
 
 .pub-links a:hover {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
+  background: var(--lav-bg);
+  color: var(--lav-ink);
+  border-color: rgba(94, 79, 140, 0.3);
 }
 
 @media (max-width: 600px) {
@@ -446,62 +540,78 @@ a:hover { color: var(--accent); }
   .pub-thumb { width: 120px; aspect-ratio: 4 / 3; }
 }
 
-/* PUB GROUPS */
 .pub-year {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
   font-size: 1.15rem;
-  color: var(--accent);
+  color: var(--peach-ink);
   margin: 1.3rem 0 0.3rem;
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  background: var(--peach-bg);
+  border-radius: 4px;
 }
 
 .pub-year:first-child { margin-top: 0; }
 
-.see-all {
-  margin-top: 1rem;
-  font-family: var(--sans);
-  font-size: 0.92rem;
+/* TEACHING */
+.teach-block { margin-bottom: 1.5rem; }
+.teach-block:last-child { margin-bottom: 0; }
+
+.teach-block-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  padding-left: 0.6rem;
+  border-left: 3px solid var(--rose-ink);
+}
+
+.teach-row {
+  display: grid;
+  grid-template-columns: 6rem 1fr auto;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  font-size: 0.97rem;
+  align-items: baseline;
+  border-bottom: 1px dotted var(--rule);
+}
+
+.teach-row:last-child { border-bottom: none; }
+
+.teach-code {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--rose-ink);
+  font-weight: 600;
+  background: var(--rose-bg);
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.teach-name { color: var(--ink); }
+
+.teach-term {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
   font-weight: 500;
 }
 
-/* HONORS */
-.honors-list {
-  list-style: none;
-  padding: 0;
+@media (max-width: 600px) {
+  .teach-row { grid-template-columns: auto 1fr; gap: 0.5rem; }
+  .teach-term { grid-column: 1 / -1; font-size: 0.74rem; }
 }
 
-.honor-item {
-  padding: 0.5rem 0 0.5rem 1.4rem;
-  font-size: 1rem;
-  position: relative;
-  line-height: 1.55;
-  color: var(--ink);
-}
-
-.honor-item::before {
-  content: "\2726";
-  position: absolute;
-  left: 0;
-  top: 0.55rem;
-  color: var(--accent);
-  font-size: 0.78rem;
-}
-
-.honor-note {
-  display: block;
-  font-family: var(--sans);
-  color: var(--faint);
-  font-size: 0.85rem;
-  margin-top: 0.1rem;
-}
-
-/* TEACHING / EXPERIENCE */
+/* EDUCATION / EXPERIENCE */
 .entry {
   display: grid;
   grid-template-columns: 9rem 1fr;
   gap: 1.4rem;
-  padding: 0.7rem 0;
+  padding: 0.85rem 0;
   border-bottom: 1px dotted var(--rule);
   align-items: baseline;
   font-size: 1rem;
@@ -510,14 +620,19 @@ a:hover { color: var(--accent); }
 .entry:last-child { border-bottom: none; }
 
 .entry-date {
-  font-family: var(--sans);
-  font-size: 0.82rem;
-  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--sun-ink);
   font-weight: 500;
+  background: var(--sun-bg);
+  padding: 0.2rem 0.45rem;
+  border-radius: 3px;
+  text-align: center;
 }
 
-.entry-role { color: var(--ink); }
+#experience .entry-date { color: var(--mint-ink); background: var(--mint-bg); }
 
+.entry-role { color: var(--ink); }
 .entry-role strong { font-weight: 700; }
 
 .entry-place {
@@ -537,58 +652,7 @@ a:hover { color: var(--accent); }
 }
 
 @media (max-width: 600px) {
-  .entry { grid-template-columns: 1fr; gap: 0.2rem; padding: 0.9rem 0; }
-}
-
-/* TEACHING TABLE */
-.teach-block { margin-bottom: 1.5rem; }
-.teach-block:last-child { margin-bottom: 0; }
-
-.teach-block-title {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--ink);
-  margin-bottom: 0.4rem;
-}
-
-.teach-row {
-  display: grid;
-  grid-template-columns: 6rem 1fr auto;
-  gap: 1rem;
-  padding: 0.35rem 0;
-  font-size: 0.97rem;
-  align-items: baseline;
-  border-bottom: 1px dotted var(--rule);
-}
-
-.teach-row:last-child { border-bottom: none; }
-
-.teach-code { font-family: var(--sans); font-size: 0.85rem; color: var(--accent); font-weight: 600; }
-.teach-name { color: var(--ink); }
-.teach-term { font-family: var(--sans); font-size: 0.82rem; color: var(--faint); font-weight: 500; }
-
-@media (max-width: 600px) {
-  .teach-row { grid-template-columns: auto 1fr; gap: 0.5rem; }
-  .teach-term { grid-column: 1 / -1; font-size: 0.78rem; }
-}
-
-/* INTERESTS */
-.interests {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem 0.55rem;
-}
-
-.interest {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--muted);
-  padding: 0.22rem 0.65rem;
-  border: 1px solid var(--rule);
-  border-radius: 2px;
-  background: var(--bg-alt);
+  .entry { grid-template-columns: 1fr; gap: 0.3rem; padding: 0.9rem 0; }
 }
 
 /* TOOLKIT */
@@ -596,27 +660,69 @@ a:hover { color: var(--accent); }
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: 7rem 1fr;
-  gap: 0.5rem 1.4rem;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.6rem 1.4rem;
   font-size: 0.96rem;
+  align-items: start;
 }
 
 .kit-label {
-  font-family: var(--sans);
-  font-size: 0.8rem;
-  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.75rem;
   font-weight: 600;
-  padding-top: 0.15rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: lowercase;
 }
+
+.kit-label:nth-of-type(8n+1) { background: var(--lav-bg); color: var(--lav-ink); }
+.kit-label:nth-of-type(8n+2) { background: var(--mint-bg); color: var(--mint-ink); }
+.kit-label:nth-of-type(8n+3) { background: var(--peach-bg); color: var(--peach-ink); }
+.kit-label:nth-of-type(8n+4) { background: var(--sky-bg); color: var(--sky-ink); }
+.kit-label:nth-of-type(8n+5) { background: var(--rose-bg); color: var(--rose-ink); }
+.kit-label:nth-of-type(8n+6) { background: var(--sun-bg); color: var(--sun-ink); }
+.kit-label:nth-of-type(8n+7) { background: var(--lav-bg); color: var(--lav-ink); }
+.kit-label:nth-of-type(8n+0) { background: var(--mint-bg); color: var(--mint-ink); }
 
 .kit-values {
   color: var(--muted);
-  line-height: 1.55;
+  line-height: 1.6;
+  font-family: var(--mono);
+  font-size: 0.84rem;
 }
 
 @media (max-width: 600px) {
-  .kit-list { grid-template-columns: 1fr; gap: 0.1rem 0; }
+  .kit-list { grid-template-columns: 1fr; gap: 0.2rem 0; }
+  .kit-label { display: inline-block; margin-bottom: 0.2rem; }
   .kit-values { padding-bottom: 0.5rem; }
+}
+
+/* HONORS */
+.honors-list { list-style: none; padding: 0; }
+.honor-item {
+  padding: 0.6rem 0 0.6rem 1.6rem;
+  font-size: 1rem;
+  position: relative;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.honor-item::before {
+  content: "\2726";
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  color: var(--peach-ink);
+  font-size: 0.8rem;
+}
+
+.honor-note {
+  display: block;
+  font-family: var(--mono);
+  color: var(--faint);
+  font-size: 0.78rem;
+  margin-top: 0.15rem;
 }
 
 /* FOOTER */
@@ -630,8 +736,24 @@ footer {
   line-height: 1.6;
 }
 
-footer a { color: var(--faint); }
-footer a:hover { color: var(--accent); }
+footer a { color: var(--lav-ink); }
+footer a:hover { color: var(--peach-ink); }
+
+footer .heart { color: var(--rose-ink); }
+
+/* import mono font */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
 
 </style>
 </head>
@@ -639,7 +761,7 @@ footer a:hover { color: var(--accent); }
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <a href="#" class="topnav-brand">Tasfia Tasnim</a>
+    <a href="#" class="topnav-brand"><span class="dot"></span>Tasfia Tasnim</a>
     <div class="topnav-links">
       <a href="#about" class="active">about</a>
       <a href="#publications">publications</a>
@@ -651,7 +773,6 @@ footer a:hover { color: var(--accent); }
 
 <div class="layout">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="profile-img" aria-label="Tasfia Tasnim">TT</div>
     <h1 class="sidebar-name">Tasfia Tasnim</h1>
@@ -660,29 +781,30 @@ footer a:hover { color: var(--accent); }
       <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>
     </div>
     <hr class="sidebar-divider"/>
-    <a class="sidebar-email" href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a>
+    <a class="sidebar-email" href="mailto:txt230023@gmail.com">txt230023@gmail.com</a>
     <div class="sidebar-icons">
-      <a href="#" title="Google Scholar">scholar</a>
-      <a href="#" title="GitHub">github</a>
-      <a href="#" title="LinkedIn">linkedin</a>
-      <a href="#" title="CV">cv</a>
+      <a href="#">scholar</a>
+      <a href="#">github</a>
+      <a href="#">linkedin</a>
+      <a href="#">cv</a>
     </div>
   </aside>
 
-  <!-- MAIN CONTENT -->
   <main class="content">
 
     <section id="about">
       <h2>About me</h2>
-      <p>
-        I am a Ph.D. student in the Department of Computer Science at <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>. Before UTD, I was a graduate research assistant at the <a href="https://www.uncc.edu/">University of North Carolina at Charlotte</a> from 2024 to 2025, and earlier served as a Lecturer at the <a href="#">Military Institute of Science and Technology</a> in Dhaka, Bangladesh.
-      </p>
-      <p>
-        My research lives at the intersection of <em>software testing</em> and <em>large language models</em>, with a growing focus on the trustworthiness and explainability of LLMs in correctness critical software tasks. Concretely, I work on automated test oracle generation, mutation testing, and the evaluation of LLM based program repair. I am interested in the question of when we can actually trust what a model produces, and what principled measurements of that trust should look like.
-      </p>
-      <p>
-        Outside of research, I enjoy reading, cooking, and long walks with my husband.
-      </p>
+      <div class="bio">
+        <p>
+          I am a Ph.D. student in the Department of Computer Science at <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>. Before UTD, I was a graduate research assistant at the <a href="https://www.uncc.edu/">University of North Carolina at Charlotte</a> from 2024 to 2025, and earlier served as a Lecturer at the Military Institute of Science and Technology in Dhaka, Bangladesh.
+        </p>
+        <p>
+          My research lives at the intersection of <span class="hl-lav">software testing</span> and <span class="hl-mint">large language models</span>, with a growing focus on the <span class="hl-peach">trustworthiness</span> and <span class="hl-sky">explainability</span> of LLMs in correctness critical software tasks. Concretely, I work on automated test oracle generation, mutation testing, and the evaluation of LLM based program repair. I am interested in the question of when we can actually trust what a model produces, and what principled measurements of that trust should look like.
+        </p>
+        <p>
+          Outside of research, I enjoy reading, cooking, and long walks with my husband.
+        </p>
+      </div>
     </section>
 
     <section id="news">
@@ -731,15 +853,15 @@ footer a:hover { color: var(--accent); }
     <section id="interests">
       <h2>Research Interests</h2>
       <div class="interests">
-        <span class="interest">Software Testing</span>
-        <span class="interest">Test Oracle Generation</span>
-        <span class="interest">LLMs for Software Engineering</span>
-        <span class="interest">Automated Program Repair</span>
-        <span class="interest">Mutation Testing</span>
-        <span class="interest">LLM Trustworthiness</span>
-        <span class="interest">Explainability</span>
-        <span class="interest">Benchmark Design</span>
-        <span class="interest">Empirical Software Engineering</span>
+        <span class="interest">software testing</span>
+        <span class="interest">test oracle generation</span>
+        <span class="interest">LLMs for software engineering</span>
+        <span class="interest">automated program repair</span>
+        <span class="interest">mutation testing</span>
+        <span class="interest">LLM trustworthiness</span>
+        <span class="interest">explainability</span>
+        <span class="interest">benchmark design</span>
+        <span class="interest">empirical software engineering</span>
       </div>
     </section>
 
@@ -749,7 +871,7 @@ footer a:hover { color: var(--accent); }
       <div class="pub-year">2026</div>
 
       <article class="pub">
-        <div class="pub-thumb">TOGBench<br/>AIware</div>
+        <div class="pub-thumb lav">TOGBench<br/>AIware</div>
         <div class="pub-body">
           <div class="pub-title">TOGBench: A Developer Written Multi Variant Dataset and Benchmark Suite for Test Oracle Generation<span class="pub-status">Accepted</span></div>
           <div class="pub-authors"><span class="self">Tasfia Tasnim</span>, et al.</div>
@@ -766,7 +888,7 @@ footer a:hover { color: var(--accent); }
       <div class="pub-year">2023</div>
 
       <article class="pub">
-        <div class="pub-thumb">Predictis<br/>BMC HSR</div>
+        <div class="pub-thumb mint">Predictis<br/>BMC HSR</div>
         <div class="pub-body">
           <div class="pub-title">Predictis: an IoT and machine learning based system to predict risk level of cardio vascular diseases</div>
           <div class="pub-authors">
@@ -783,7 +905,7 @@ footer a:hover { color: var(--accent); }
       <div class="pub-year">2022</div>
 
       <article class="pub">
-        <div class="pub-thumb">Cervical<br/>Cancer<br/>Review</div>
+        <div class="pub-thumb peach">Cervical<br/>Cancer<br/>Review</div>
         <div class="pub-body">
           <div class="pub-title">Digital Health Interventions for Cervical Cancer Care: A Systematic Review and Future Research Opportunities</div>
           <div class="pub-authors">
@@ -800,7 +922,7 @@ footer a:hover { color: var(--accent); }
       <div class="pub-year">2021</div>
 
       <article class="pub">
-        <div class="pub-thumb">Cyber<br/>bullying<br/>IC4ME2</div>
+        <div class="pub-thumb sky">Cyber<br/>bullying<br/>IC4ME2</div>
         <div class="pub-body">
           <div class="pub-title">A Framework to Detect and Prevent Cyberbullying from Social Media by Exploring Machine Learning Algorithms</div>
           <div class="pub-authors">
@@ -826,7 +948,7 @@ footer a:hover { color: var(--accent); }
           <span class="teach-term">Spring 2026</span>
         </div>
         <div class="teach-row">
-          <span class="teach-code">CS / SE 6356</span>
+          <span class="teach-code">SE 6356</span>
           <span class="teach-name">Software Maintenance, Evolution, and Re-Engineering</span>
           <span class="teach-term">Spring 2026</span>
         </div>
@@ -875,14 +997,14 @@ footer a:hover { color: var(--accent); }
     <section id="education">
       <h2>Education</h2>
       <div class="entry">
-        <div class="entry-date">Jan 2026 to Present</div>
+        <div class="entry-date">2026 to Now</div>
         <div>
           <div class="entry-role"><strong>Ph.D., Computer Science</strong></div>
           <span class="entry-place">The University of Texas at Dallas, Richardson, TX</span>
         </div>
       </div>
       <div class="entry">
-        <div class="entry-date">Aug 2024 to Dec 2025</div>
+        <div class="entry-date">2024 to 2025</div>
         <div>
           <div class="entry-role"><strong>Ph.D. student, Computer Science</strong></div>
           <span class="entry-place">University of North Carolina at Charlotte, Charlotte, NC</span>
@@ -890,7 +1012,7 @@ footer a:hover { color: var(--accent); }
         </div>
       </div>
       <div class="entry">
-        <div class="entry-date">Feb 2018 to Mar 2022</div>
+        <div class="entry-date">2018 to 2022</div>
         <div>
           <div class="entry-role"><strong>B.Sc. in Computer Science and Engineering</strong></div>
           <span class="entry-place">Military Institute of Science and Technology, Dhaka, Bangladesh</span>
@@ -902,42 +1024,42 @@ footer a:hover { color: var(--accent); }
     <section id="experience">
       <h2>Experience</h2>
       <div class="entry">
-        <div class="entry-date">Jan 2026 to Present</div>
+        <div class="entry-date">2026 to Now</div>
         <div>
           <div class="entry-role"><strong>Graduate Teaching Assistant</strong></div>
           <span class="entry-place">The University of Texas at Dallas</span>
         </div>
       </div>
       <div class="entry">
-        <div class="entry-date">Aug 2024 to Dec 2025</div>
+        <div class="entry-date">2024 to 2025</div>
         <div>
           <div class="entry-role"><strong>Graduate Research Assistant</strong></div>
           <span class="entry-place">University of North Carolina at Charlotte</span>
         </div>
       </div>
       <div class="entry">
-        <div class="entry-date">Sep to Dec 2023</div>
+        <div class="entry-date">Sep to Dec 23</div>
         <div>
           <div class="entry-role"><strong>Full Stack Developer</strong></div>
           <span class="entry-place">Johns Hopkins Center for Communication Programs, Bangladesh</span>
         </div>
       </div>
       <div class="entry">
-        <div class="entry-date">Jun to Aug 2023</div>
+        <div class="entry-date">Jun to Aug 23</div>
         <div>
           <div class="entry-role"><strong>Full Stack Developer Intern</strong></div>
           <span class="entry-place">We Tech Global, Finland</span>
         </div>
       </div>
       <div class="entry">
-        <div class="entry-date">Apr 2022 to Mar 2023</div>
+        <div class="entry-date">2022 to 2023</div>
         <div>
           <div class="entry-role"><strong>Lecturer</strong></div>
           <span class="entry-place">Military Institute of Science and Technology, Dhaka</span>
         </div>
       </div>
       <div class="entry">
-        <div class="entry-date">Apr to Sep 2022</div>
+        <div class="entry-date">Apr to Sep 22</div>
         <div>
           <div class="entry-role"><strong>Research Associate</strong></div>
           <span class="entry-place">Military Institute of Science and Technology, Dhaka</span>
@@ -955,10 +1077,10 @@ footer a:hover { color: var(--accent); }
     <section id="toolkit">
       <h2>Toolkit</h2>
       <ul class="kit-list">
-        <li class="kit-label">Languages</li>
+        <li class="kit-label">languages</li>
         <li class="kit-values">Python, Java, C, C++, PL/SQL, JavaScript, Shell</li>
 
-        <li class="kit-label">Testing and SE</li>
+        <li class="kit-label">testing &amp; SE</li>
         <li class="kit-values">JUnit, Defects4J, EvoSuite, PIT (Pitest), GumTree, JaCoCo, PMD, Maven, Git</li>
 
         <li class="kit-label">ML</li>
@@ -967,16 +1089,16 @@ footer a:hover { color: var(--accent); }
         <li class="kit-label">LLM</li>
         <li class="kit-values">Hugging Face Transformers, PEFT, TRL, LangChain, LlamaIndex, vLLM, sentence transformers, CodeBERT</li>
 
-        <li class="kit-label">Local LLMs</li>
+        <li class="kit-label">local LLMs</li>
         <li class="kit-values">Ollama, Llama 3, Mistral, CodeLlama, DeepSeek Coder, Qwen, Phi, Gemma</li>
 
-        <li class="kit-label">Web</li>
+        <li class="kit-label">web</li>
         <li class="kit-values">Django REST, Laravel, .NET, Android SDK</li>
 
-        <li class="kit-label">Data</li>
+        <li class="kit-label">data</li>
         <li class="kit-values">MySQL, Oracle, SQLite, Firebase, MongoDB</li>
 
-        <li class="kit-label">Writing</li>
+        <li class="kit-label">writing</li>
         <li class="kit-values">LaTeX, Overleaf, Beamer</li>
       </ul>
     </section>
@@ -1007,7 +1129,7 @@ footer a:hover { color: var(--accent); }
 </div>
 
 <footer>
-  &copy; 2026 Tasfia Tasnim &middot; <a href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a> &middot; Last updated April 2026
+  &copy; 2026 Tasfia Tasnim &middot; <a href="mailto:txt230023@gmail.com">txt230023@gmail.com</a> &middot; built with <span class="heart">&#9829;</span> and curiosity
 </footer>
 
 <script>
