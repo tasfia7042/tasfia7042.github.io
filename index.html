@@ -308,23 +308,48 @@ img.profile-img {
 .sidebar-divider::before { left: -10px; }
 .sidebar-divider::after { right: -10px; }
 
+.sidebar-emails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+}
+
 .sidebar-email {
   font-family: var(--mono);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--ink);
   display: inline-block;
   word-break: break-all;
-  padding: 0.3rem 0.6rem;
-  background: var(--lav);
+  padding: 0.3rem 0.65rem;
   border-radius: 4px;
   border: 1px solid var(--rule);
   transition: all 0.2s ease;
+  text-align: center;
 }
 
-.sidebar-email:hover {
+.sidebar-email.primary {
+  background: var(--lav);
+  font-weight: 600;
+}
+
+.sidebar-email.secondary {
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.74rem;
+  border-color: var(--rule);
+}
+
+.sidebar-email.primary:hover {
   background: var(--ink);
   color: var(--bg);
   border-color: var(--ink);
+}
+
+.sidebar-email.secondary:hover {
+  background: var(--lav);
+  color: var(--ink);
+  border-color: var(--rule);
 }
 
 .sidebar-icons {
@@ -1179,8 +1204,10 @@ footer .heart { color: var(--blush-d); }
         <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>
       </div>
       <hr class="sidebar-divider"/>
-      <a class="sidebar-email" href="mailto:txt230023@utdallas.edu">txt230023@utdallas.edu</a>
-      <a class="sidebar-email" href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a>
+      <div class="sidebar-emails">
+        <a class="sidebar-email primary" href="mailto:txt230023@utdallas.edu">txt230023@utdallas.edu</a>
+        <a class="sidebar-email secondary" href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a>
+      </div>
       <div class="sidebar-icons">
         <a href="https://scholar.google.com/citations?user=qn2iKXIAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">scholar</a>
         <a href="https://github.com/tasfia7042" target="_blank" rel="noopener">github</a>
