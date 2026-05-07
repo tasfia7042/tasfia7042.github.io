@@ -108,9 +108,9 @@ a:hover { color: var(--link-hover); }
 }
 
 .topnav-inner {
-  max-width: min(1400px, 92vw);
+  max-width: min(1700px, 96vw);
   margin: 0 auto;
-  padding: 0.9rem clamp(1.25rem, 3vw, 3rem);
+  padding: 0.9rem clamp(1.25rem, 2.5vw, 2.5rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -169,12 +169,12 @@ a:hover { color: var(--link-hover); }
 }
 
 .layout {
-  max-width: min(1400px, 92vw);
+  max-width: min(1700px, 96vw);
   margin: 0 auto;
-  padding: 3rem clamp(1.25rem, 3vw, 3rem) 4rem;
+  padding: 2.5rem clamp(1.25rem, 2.5vw, 2.5rem) 4rem;
   display: grid;
-  grid-template-columns: clamp(240px, 22vw, 320px) 1fr;
-  gap: clamp(2rem, 4vw, 5rem);
+  grid-template-columns: clamp(280px, 20vw, 360px) 1fr;
+  gap: clamp(1.5rem, 2.5vw, 3rem);
   align-items: start;
 }
 
@@ -222,7 +222,7 @@ a:hover { color: var(--link-hover); }
 
 .profile-frame {
   position: relative;
-  width: clamp(150px, 75%, 220px);
+  width: clamp(180px, 85%, 280px);
   aspect-ratio: 1 / 1;
   margin: 0 auto 1.4rem;
 }
@@ -388,7 +388,7 @@ img.profile-img {
   background: rgba(255, 255, 255, 0.78);
   border: 1px solid var(--rule);
   border-radius: 12px;
-  padding: 2rem 2.2rem;
+  padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(1.5rem, 3vw, 3rem);
   margin-bottom: 1.5rem;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -559,8 +559,8 @@ img.profile-img {
 /* PUBLICATIONS */
 .pub {
   display: grid;
-  grid-template-columns: 6.5rem 1fr;
-  gap: 1.4rem;
+  grid-template-columns: clamp(7rem, 9vw, 10rem) 1fr;
+  gap: clamp(1.2rem, 2vw, 2rem);
   padding: 1.3rem 0;
   border-bottom: 1px solid var(--rule);
   align-items: start;
