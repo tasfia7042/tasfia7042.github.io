@@ -8,7 +8,6 @@
 
 <style>
 :root {
-  /* base */
   --bg: #FAFBFD;
   --bg-card: #FFFFFF;
   --ink: #16182A;
@@ -18,7 +17,6 @@
   --rule: #E2E5EE;
   --rule-soft: #EDEFF6;
 
-  /* cool palette only: lavender, lilac, periwinkle, sky, blush, slate */
   --lav: #ECE7F6;
   --lilac: #E8DFF1;
   --peri: #E2E6F5;
@@ -55,7 +53,6 @@ body {
   overflow-x: hidden;
 }
 
-/* CIRCUIT BOARD BACKGROUND (cool palette, no letters) */
 .bg-circuit {
   position: fixed;
   inset: 0;
@@ -71,7 +68,6 @@ body {
   inset: 0;
 }
 
-/* soft cool washes */
 .bg-glow {
   position: fixed;
   inset: 0;
@@ -86,26 +82,21 @@ body {
   opacity: 0.6;
 }
 
-/* SIDEBAR BRAIN: small, sits inside sidebar card on desktop */
+/* DESKTOP BRAIN: outside sidebar card, under it */
 .sidebar-brain {
-  margin-top: 1.2rem;
-  padding-top: 1.2rem;
-  border-top: 1px dotted var(--rule);
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 .sidebar-brain svg {
-  width: 90px;
+  width: clamp(110px, 60%, 170px);
   height: auto;
   display: block;
 }
 
-/* MOBILE BRAIN: appears at bottom of page on small screens */
-.mobile-brain {
-  display: none;
-}
+.mobile-brain { display: none; }
 
 @media (max-width: 900px) {
   .sidebar-brain { display: none; }
@@ -134,7 +125,6 @@ a {
 
 a:hover { color: var(--link-hover); }
 
-/* TOP NAV */
 .topnav {
   position: sticky;
   top: 0;
@@ -224,7 +214,6 @@ a:hover { color: var(--link-hover); }
   }
 }
 
-/* SIDEBAR */
 .sidebar {
   position: sticky;
   top: 5.5rem;
@@ -421,7 +410,6 @@ img.profile-img {
   box-shadow: 0 4px 8px -2px rgba(22, 24, 42, 0.12);
 }
 
-/* MAIN CONTENT */
 .content section {
   background: rgba(255, 255, 255, 0.78);
   border: 1px solid var(--rule);
@@ -459,8 +447,8 @@ img.profile-img {
 }
 
 #about h2::before { background: var(--lav-d); box-shadow: 0 0 0 2px var(--lav-d); }
-#news h2::before { background: var(--peri-d); box-shadow: 0 0 0 2px var(--peri-d); }
 #interests h2::before { background: var(--blush-d); box-shadow: 0 0 0 2px var(--blush-d); }
+#news h2::before { background: var(--peri-d); box-shadow: 0 0 0 2px var(--peri-d); }
 #publications h2::before { background: var(--sky-d); box-shadow: 0 0 0 2px var(--sky-d); }
 #teaching h2::before { background: var(--lilac-d); box-shadow: 0 0 0 2px var(--lilac-d); }
 #education h2::before { background: var(--slate-d); box-shadow: 0 0 0 2px var(--slate-d); }
@@ -501,11 +489,10 @@ img.profile-img {
 .bio .hl-blush { background: var(--blush); }
 .bio .hl-sky { background: var(--sky); }
 
-/* NEWS */
 .news-list {
   list-style: none;
   padding: 0;
-  max-height: 360px;
+  max-height: 420px;
   overflow-y: auto;
   border: 1px solid var(--rule);
   background: var(--bg-card);
@@ -564,7 +551,6 @@ img.profile-img {
   .news-item { grid-template-columns: 1fr; gap: 0.2rem; }
 }
 
-/* INTERESTS */
 .interests {
   display: flex;
   flex-wrap: wrap;
@@ -594,7 +580,6 @@ img.profile-img {
 .interest:nth-child(6n+5) { background: var(--blush); }
 .interest:nth-child(6n+0) { background: var(--slate); }
 
-/* PUBLICATIONS */
 .pub {
   display: grid;
   grid-template-columns: clamp(7rem, 9vw, 10rem) 1fr;
@@ -736,7 +721,6 @@ img.profile-img {
 
 .pub-year:first-child { margin-top: 0; }
 
-/* TEACHING */
 .teach-block { margin-bottom: 1.5rem; }
 .teach-block:last-child { margin-bottom: 0; }
 
@@ -791,7 +775,6 @@ img.profile-img {
   .teach-term { grid-column: 1 / -1; font-size: 0.74rem; }
 }
 
-/* EDUCATION / EXPERIENCE */
 .entry {
   display: grid;
   grid-template-columns: 9rem 1fr;
@@ -841,7 +824,6 @@ img.profile-img {
   .entry { grid-template-columns: 1fr; gap: 0.3rem; padding: 0.9rem 0; }
 }
 
-/* TOOLKIT */
 .kit-list {
   list-style: none;
   padding: 0;
@@ -884,7 +866,6 @@ img.profile-img {
   .kit-values { padding-bottom: 0.5rem; }
 }
 
-/* HONORS */
 .honors-list { list-style: none; padding: 0; }
 .honor-item {
   padding: 0.65rem 0 0.65rem 1.7rem;
@@ -911,7 +892,6 @@ img.profile-img {
   margin-top: 0.15rem;
 }
 
-/* FOOTER */
 footer {
   padding: 2.5rem 0 3rem;
   font-family: var(--sans);
@@ -925,9 +905,7 @@ footer {
 
 footer a { color: var(--ink); border-bottom: 1px dotted var(--rule); }
 footer a:hover { border-bottom-color: var(--ink); }
-footer .heart { color: var(--blush-d); }
 
-/* fonts */
 @font-face {
   font-family: 'JetBrains Mono';
   src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2');
@@ -945,7 +923,6 @@ footer .heart { color: var(--blush-d); }
 </head>
 <body>
 
-<!-- CIRCUIT BOARD: cool palette, no text, no central brain (brain is now separate) -->
 <div class="bg-circuit">
   <svg viewBox="0 0 1600 2400" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -953,10 +930,7 @@ footer .heart { color: var(--blush-d); }
         <circle cx="16" cy="16" r="0.8" fill="#B8BED1"/>
       </pattern>
     </defs>
-
     <rect width="1600" height="2400" fill="url(#dotgrid)" opacity="0.45"/>
-
-    <!-- horizontal traces -->
     <g stroke="#BFC5DC" stroke-width="1.4" fill="none" opacity="0.55">
       <path d="M 0 180 L 240 180 L 280 220 L 480 220 L 520 180 L 800 180"/>
       <path d="M 1600 320 L 1380 320 L 1340 360 L 1100 360 L 1060 320 L 900 320"/>
@@ -970,8 +944,6 @@ footer .heart { color: var(--blush-d); }
       <path d="M 1600 2000 L 1380 2000 L 1340 2040 L 1180 2040"/>
       <path d="M 0 2260 L 280 2260 L 320 2220 L 540 2220"/>
     </g>
-
-    <!-- vertical traces -->
     <g stroke="#CFD3E4" stroke-width="1" fill="none" opacity="0.45">
       <path d="M 100 0 L 100 240 L 140 280 L 140 480"/>
       <path d="M 1480 0 L 1480 200 L 1440 240 L 1440 420"/>
@@ -986,8 +958,6 @@ footer .heart { color: var(--blush-d); }
       <path d="M 600 1880 L 600 2140"/>
       <path d="M 980 2000 L 980 2260"/>
     </g>
-
-    <!-- solder pads (vias) -->
     <g fill="#DDE0EF" stroke="#A8AECB" stroke-width="1" opacity="0.7">
       <circle cx="240" cy="180" r="3.5"/>
       <circle cx="280" cy="220" r="3.5"/>
@@ -1035,8 +1005,6 @@ footer .heart { color: var(--blush-d); }
       <circle cx="1200" cy="460" r="3.5"/>
       <circle cx="1160" cy="500" r="3.5"/>
     </g>
-
-    <!-- chip rectangles -->
     <g fill="#ECE7F6" stroke="#A89AC4" stroke-width="1.4" opacity="0.85">
       <rect x="80" y="320" width="120" height="60" rx="4"/>
       <rect x="1320" y="480" width="160" height="80" rx="4"/>
@@ -1045,8 +1013,6 @@ footer .heart { color: var(--blush-d); }
       <rect x="80" y="2080" width="160" height="80" rx="4"/>
       <rect x="1340" y="2180" width="160" height="80" rx="4"/>
     </g>
-
-    <!-- chip pins -->
     <g stroke="#A89AC4" stroke-width="1" opacity="0.7">
       <line x1="100" y1="320" x2="100" y2="312"/>
       <line x1="115" y1="320" x2="115" y2="312"/>
@@ -1060,7 +1026,6 @@ footer .heart { color: var(--blush-d); }
       <line x1="145" y1="380" x2="145" y2="388"/>
       <line x1="160" y1="380" x2="160" y2="388"/>
       <line x1="175" y1="380" x2="175" y2="388"/>
-
       <line x1="1340" y1="480" x2="1340" y2="472"/>
       <line x1="1360" y1="480" x2="1360" y2="472"/>
       <line x1="1380" y1="480" x2="1380" y2="472"/>
@@ -1076,15 +1041,12 @@ footer .heart { color: var(--blush-d); }
       <line x1="1440" y1="560" x2="1440" y2="568"/>
       <line x1="1460" y1="560" x2="1460" y2="568"/>
     </g>
-
-    <!-- corner mounting holes -->
     <g stroke="#A8AECB" stroke-width="1" fill="none" opacity="0.4">
       <circle cx="160" cy="80" r="14"/>
       <circle cx="160" cy="80" r="6"/>
       <circle cx="1440" cy="100" r="14"/>
       <circle cx="1440" cy="100" r="6"/>
     </g>
-
   </svg>
 </div>
 
@@ -1119,175 +1081,59 @@ footer .heart { color: var(--blush-d); }
         <a class="sidebar-email primary" href="mailto:txt230023@utdallas.edu">txt230023@utdallas.edu</a>
         <a class="sidebar-email secondary" href="mailto:tasfiatasnim7042@gmail.com">tasfiatasnim7042@gmail.com</a>
       </div>
-<div class="sidebar-icons">
+      <div class="sidebar-icons">
         <a href="https://scholar.google.com/citations?user=qn2iKXIAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">scholar</a>
         <a href="https://github.com/tasfia7042" target="_blank" rel="noopener">github</a>
         <a href="https://www.linkedin.com/in/tasfia-tasnim-1a52631aa/" target="_blank" rel="noopener">linkedin</a>
         <a href="https://drive.google.com/file/d/14rnAmS9Wd43MnfhGK2Cc7ua1q7rf3BMg/view?usp=sharing" target="_blank" rel="noopener">cv</a>
       </div>
+    </div>
 
-      <div class="sidebar-brain" aria-hidden="true">
-        <svg viewBox="-130 -120 260 240" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#EDE6F4" stroke="#7E6CAA" stroke-width="2.5">
-            <path d="M -10 -100 C -50 -110, -90 -90, -100 -60 C -120 -55, -125 -25, -110 -10 C -130 5, -125 30, -105 40 C -110 70, -85 90, -60 88 C -50 105, -25 105, -10 90 L -10 -100 Z"/>
-            <path d="M 10 -100 C 50 -110, 90 -90, 100 -60 C 120 -55, 125 -25, 110 -10 C 130 5, 125 30, 105 40 C 110 70, 85 90, 60 88 C 50 105, 25 105, 10 90 L 10 -100 Z"/>
-          </g>
-          <g fill="none" stroke="#7E6CAA" stroke-width="1.6" opacity="0.85">
-            <path d="M -85 -55 C -70 -60, -55 -45, -50 -25"/>
-            <path d="M -100 -25 C -75 -20, -65 0, -75 20"/>
-            <path d="M -90 25 C -65 25, -50 45, -55 70"/>
-            <path d="M 85 -55 C 70 -60, 55 -45, 50 -25"/>
-            <path d="M 100 -25 C 75 -20, 65 0, 75 20"/>
-            <path d="M 90 25 C 65 25, 50 45, 55 70"/>
-            <path d="M -25 -85 L -25 90"/>
-            <path d="M 25 -85 L 25 90"/>
-          </g>
-          <g fill="#9484BD">
-            <circle cx="-70" cy="-40" r="3"/>
-            <circle cx="-50" cy="50" r="3"/>
-            <circle cx="70" cy="-40" r="3"/>
-            <circle cx="50" cy="50" r="3"/>
-            <circle cx="-30" cy="-60" r="3"/>
-            <circle cx="30" cy="-60" r="3"/>
-          </g>
-        </svg>
-      </div>
+    <!-- BRAIN: outside the sidebar-card, sits below it on desktop -->
+    <div class="sidebar-brain" aria-hidden="true">
+      <svg viewBox="-130 -120 260 240" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#EDE6F4" stroke="#7E6CAA" stroke-width="2.5">
+          <path d="M -10 -100 C -50 -110, -90 -90, -100 -60 C -120 -55, -125 -25, -110 -10 C -130 5, -125 30, -105 40 C -110 70, -85 90, -60 88 C -50 105, -25 105, -10 90 L -10 -100 Z"/>
+          <path d="M 10 -100 C 50 -110, 90 -90, 100 -60 C 120 -55, 125 -25, 110 -10 C 130 5, 125 30, 105 40 C 110 70, 85 90, 60 88 C 50 105, 25 105, 10 90 L 10 -100 Z"/>
+        </g>
+        <g fill="none" stroke="#7E6CAA" stroke-width="1.6" opacity="0.85">
+          <path d="M -85 -55 C -70 -60, -55 -45, -50 -25"/>
+          <path d="M -100 -25 C -75 -20, -65 0, -75 20"/>
+          <path d="M -90 25 C -65 25, -50 45, -55 70"/>
+          <path d="M 85 -55 C 70 -60, 55 -45, 50 -25"/>
+          <path d="M 100 -25 C 75 -20, 65 0, 75 20"/>
+          <path d="M 90 25 C 65 25, 50 45, 55 70"/>
+          <path d="M -25 -85 L -25 90"/>
+          <path d="M 25 -85 L 25 90"/>
+        </g>
+        <g fill="#9484BD">
+          <circle cx="-70" cy="-40" r="3"/>
+          <circle cx="-50" cy="50" r="3"/>
+          <circle cx="70" cy="-40" r="3"/>
+          <circle cx="50" cy="50" r="3"/>
+          <circle cx="-30" cy="-60" r="3"/>
+          <circle cx="30" cy="-60" r="3"/>
+        </g>
+      </svg>
     </div>
   </aside>
 
   <main class="content">
 
-  <section id="about">
-    <h2>About me</h2>
-    <div class="bio">
-      <p>
-        I am a Ph.D. student in the Department of Computer Science at <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>. Before UTD, I was a graduate research assistant at the <a href="https://www.uncc.edu/">University of North Carolina at Charlotte</a> from 2024 to 2025, and earlier served as a Lecturer at the Military Institute of Science and Technology in Dhaka, Bangladesh.
-      </p>
-      <p>
-        My research focuses on the <span class="hl-lav">explainability</span> and <span class="hl-peri">reliability</span> of <span class="hl-sky">large language models</span>. I build <span class="hl-blush">benchmarks and datasets</span> to evaluate LLM based tools, with the goal of understanding how these models behave and where they break. I am interested in the question of when we can actually trust what a model produces, and what principled measurements of that trust should look like.
-      </p>
-      <p>
-        Outside of research, I enjoy fashion, music, and preaching about self care.
-      </p>
-    </div>
-  </section>
-
-<ul class="news-list">
-
-  <li class="news-item">
-    <div class="news-date">Apr 2026</div>
-    <div class="news-text">
-      <span class="news-tag">New</span>
-      Our paper <em>TOGBench: A Developer Written Multi Variant Dataset and Benchmark Suite for Test Oracle Generation</em> has been accepted at <strong>AIware 2026</strong> (Benchmark and Dataset Track).
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Jan 2026</div>
-    <div class="news-text">
-      Started as a Graduate Teaching Assistant at <strong>The University of Texas at Dallas</strong>, TAing <em>SE 4367: Software Testing, Verification, Validation and QA</em> and <em>CS / SE 6356: Software Maintenance, Evolution, and Re-Engineering</em>.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Jan 2026</div>
-    <div class="news-text">
-      Transferred my Ph.D. to <strong>The University of Texas at Dallas</strong> to continue research on LLM explainability and reliability.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Dec 2025</div>
-    <div class="news-text">
-      Completed three semesters at the <strong>University of North Carolina at Charlotte</strong> with a perfect 4.00 / 4.00 GPA.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Aug 2024</div>
-    <div class="news-text">
-      Began doctoral studies in Computer Science as a Graduate Research Assistant at the <strong>University of North Carolina at Charlotte</strong>.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">2023</div>
-    <div class="news-text">
-      Our journal paper <em>Predictis: an IoT and Machine Learning Based System to Predict Risk Level of Cardiovascular Diseases</em> was published in <strong>BMC Health Services Research</strong>.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Sep 2023</div>
-    <div class="news-text">
-      Joined <strong>Johns Hopkins Center for Communication Programs, Bangladesh</strong> as a Full Stack Developer, contributing to global public health software.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Jun 2023</div>
-    <div class="news-text">
-      Completed an international summer internship as a Full Stack Developer at <strong>We Tech Global</strong> in <em>Finland</em>.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">2022</div>
-    <div class="news-text">
-      Our systematic review on <em>Digital Health Interventions for Cervical Cancer Care</em> was published, surveying future research opportunities in cervical cancer screening technologies.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Apr 2022</div>
-    <div class="news-text">
-      Joined the <strong>Military Institute of Science and Technology</strong> as a Lecturer in Computer Science, teaching theory and lab courses to undergraduate students.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Mar 2022</div>
-    <div class="news-text">
-      Graduated from MIST with a B.Sc. in Computer Science and Engineering, CGPA 3.85 / 4.00, earning the <strong>Dean's List of Honor</strong>.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Dec 2021</div>
-    <div class="news-text">
-      Presented our cyberbullying detection framework at <strong>IC4ME2 2021</strong>, hosted at Rajshahi University, Bangladesh.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">2018 to 2021</div>
-    <div class="news-text">
-      Earned a place on the <strong>MIST Dean's List of Honor</strong> for four consecutive academic years and received the University Merit Scholarship across all four levels.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Jan 2021</div>
-    <div class="news-text">
-      Completed an industrial training program at <strong>Grameenphone Limited</strong>, Bangladesh's largest telecommunications operator.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">2017</div>
-    <div class="news-text">
-      Awarded <strong>Second Runner Up</strong> at the Regional Math Olympiad.
-    </div>
-  </li>
-
-  <li class="news-item">
-    <div class="news-date">Feb 2018</div>
-    <div class="news-text">
-      Began undergraduate studies in Computer Science and Engineering at the <strong>Military Institute of Science and Technology</strong> in Dhaka, Bangladesh.
-    </div>
-  </li>
-
-</ul>
+    <section id="about">
+      <h2>About me</h2>
+      <div class="bio">
+        <p>
+          I am a Ph.D. student in the Department of Computer Science at <a href="https://www.utdallas.edu/">The University of Texas at Dallas</a>. Before UTD, I was a graduate research assistant at the <a href="https://www.uncc.edu/">University of North Carolina at Charlotte</a> from 2024 to 2025, and earlier served as a Lecturer at the Military Institute of Science and Technology in Dhaka, Bangladesh.
+        </p>
+        <p>
+          My research focuses on the <span class="hl-lav">explainability</span> and <span class="hl-peri">reliability</span> of <span class="hl-sky">large language models</span>. I build <span class="hl-blush">benchmarks and datasets</span> to evaluate LLM based tools, with the goal of understanding how these models behave and where they break. I am interested in the question of when we can actually trust what a model produces, and what principled measurements of that trust should look like.
+        </p>
+        <p>
+          Outside of research, I enjoy fashion, music, and preaching about self care.
+        </p>
+      </div>
+    </section>
 
     <section id="interests">
       <h2>Research Interests</h2>
@@ -1300,6 +1146,126 @@ footer .heart { color: var(--blush-d); }
         <span class="interest">healthcare</span>
         <span class="interest">human computer interaction</span>
       </div>
+    </section>
+
+    <section id="news">
+      <h2>Recent News</h2>
+      <ul class="news-list">
+
+        <li class="news-item">
+          <div class="news-date">Apr 2026</div>
+          <div class="news-text">
+            <span class="news-tag">New</span>
+            Our paper <em>TOGBench: A Developer Written Multi Variant Dataset and Benchmark Suite for Test Oracle Generation</em> has been accepted at <strong>AIware 2026</strong> (Benchmark and Dataset Track).
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Jan 2026</div>
+          <div class="news-text">
+            Started as a Graduate Teaching Assistant at <strong>The University of Texas at Dallas</strong>, TAing <em>SE 4367: Software Testing, Verification, Validation and QA</em> and <em>CS / SE 6356: Software Maintenance, Evolution, and Re-Engineering</em>.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Jan 2026</div>
+          <div class="news-text">
+            Transferred my Ph.D. to <strong>The University of Texas at Dallas</strong> to continue research on LLM explainability and reliability.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Dec 2025</div>
+          <div class="news-text">
+            Completed three semesters at the <strong>University of North Carolina at Charlotte</strong> with a perfect 4.00 / 4.00 GPA.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Aug 2024</div>
+          <div class="news-text">
+            Began doctoral studies in Computer Science as a Graduate Research Assistant at the <strong>University of North Carolina at Charlotte</strong>.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Sep 2023</div>
+          <div class="news-text">
+            Joined <strong>Johns Hopkins Center for Communication Programs, Bangladesh</strong> as a Full Stack Developer, contributing to global public health software.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">2023</div>
+          <div class="news-text">
+            Our journal paper <em>Predictis: an IoT and Machine Learning Based System to Predict Risk Level of Cardiovascular Diseases</em> was published in <strong>BMC Health Services Research</strong>.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Jun 2023</div>
+          <div class="news-text">
+            Completed an international summer internship as a Full Stack Developer at <strong>We Tech Global</strong> in <em>Finland</em>.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">2022</div>
+          <div class="news-text">
+            Our systematic review on <em>Digital Health Interventions for Cervical Cancer Care</em> was published, surveying future research opportunities in cervical cancer screening technologies.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Apr 2022</div>
+          <div class="news-text">
+            Joined the <strong>Military Institute of Science and Technology</strong> as a Lecturer in Computer Science, teaching theory and lab courses to undergraduate students.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Mar 2022</div>
+          <div class="news-text">
+            Graduated from MIST with a B.Sc. in Computer Science and Engineering, CGPA 3.85 / 4.00, earning the <strong>Dean's List of Honor</strong>.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Dec 2021</div>
+          <div class="news-text">
+            Presented our cyberbullying detection framework at <strong>IC4ME2 2021</strong>, hosted at Rajshahi University, Bangladesh.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Jan 2021</div>
+          <div class="news-text">
+            Completed an industrial training program at <strong>Grameenphone Limited</strong>, Bangladesh's largest telecommunications operator.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">2018 to 2021</div>
+          <div class="news-text">
+            Earned a place on the <strong>MIST Dean's List of Honor</strong> for four consecutive academic years and received the University Merit Scholarship across all four levels.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">Feb 2018</div>
+          <div class="news-text">
+            Began undergraduate studies in Computer Science and Engineering at the <strong>Military Institute of Science and Technology</strong> in Dhaka, Bangladesh.
+          </div>
+        </li>
+
+        <li class="news-item">
+          <div class="news-date">2017</div>
+          <div class="news-text">
+            Awarded <strong>Second Runner Up</strong> at the Regional Math Olympiad.
+          </div>
+        </li>
+
+      </ul>
     </section>
 
     <section id="publications">
@@ -1569,7 +1535,6 @@ footer .heart { color: var(--blush-d); }
   &copy; 2026 &middot; Tasfia Tasnim
 </footer>
 
-<!-- MOBILE BRAIN: appears at bottom only on small screens -->
 <div class="mobile-brain" aria-hidden="true">
   <svg viewBox="-130 -120 260 240" xmlns="http://www.w3.org/2000/svg">
     <g fill="#EDE6F4" stroke="#7E6CAA" stroke-width="2.5">
