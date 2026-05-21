@@ -152,16 +152,16 @@ a:hover { color: var(--link-hover); }
   letter-spacing: 0.01em;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
-.topnav-brand .dot {
+/* Brand accent: slim vertical gradient bar instead of a dot */
+.topnav-brand .bar {
   display: inline-block;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--lav-d), var(--peri-d), var(--blush-d));
-  box-shadow: 0 0 0 3px var(--lav);
+  width: 3px;
+  height: 17px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--lav-d), var(--peri-d), var(--blush-d));
 }
 
 .topnav-links {
@@ -432,29 +432,29 @@ img.profile-img {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--rule);
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.7rem;
 }
 
+/* Section accent: short vertical bar instead of a dot */
 .content h2::before {
   content: "";
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  width: 4px;
+  height: 1.15em;
+  border-radius: 2px;
   flex-shrink: 0;
-  border: 2px solid var(--bg-card);
 }
 
-#about h2::before { background: var(--lav-d); box-shadow: 0 0 0 2px var(--lav-d); }
-#interests h2::before { background: var(--blush-d); box-shadow: 0 0 0 2px var(--blush-d); }
-#news h2::before { background: var(--peri-d); box-shadow: 0 0 0 2px var(--peri-d); }
-#publications h2::before { background: var(--sky-d); box-shadow: 0 0 0 2px var(--sky-d); }
-#teaching h2::before { background: var(--lilac-d); box-shadow: 0 0 0 2px var(--lilac-d); }
-#education h2::before { background: var(--slate-d); box-shadow: 0 0 0 2px var(--slate-d); }
-#experience h2::before { background: var(--peri-d); box-shadow: 0 0 0 2px var(--peri-d); }
-#toolkit h2::before { background: var(--lav-d); box-shadow: 0 0 0 2px var(--lav-d); }
-#honors h2::before { background: var(--blush-d); box-shadow: 0 0 0 2px var(--blush-d); }
+#about h2::before { background: var(--lav-d); }
+#interests h2::before { background: var(--blush-d); }
+#news h2::before { background: var(--peri-d); }
+#publications h2::before { background: var(--sky-d); }
+#teaching h2::before { background: var(--lilac-d); }
+#education h2::before { background: var(--slate-d); }
+#experience h2::before { background: var(--peri-d); }
+#toolkit h2::before { background: var(--lav-d); }
+#honors h2::before { background: var(--blush-d); }
 
 .content p {
   font-size: 1.05rem;
@@ -1054,7 +1054,7 @@ footer a:hover { border-bottom-color: var(--ink); }
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <a href="#" class="topnav-brand"><span class="dot"></span>Tasfia Tasnim</a>
+    <a href="#" class="topnav-brand"><span class="bar"></span>Tasfia Tasnim</a>
     <div class="topnav-links">
       <a href="#about" class="active">about</a>
       <a href="#publications">publications</a>
